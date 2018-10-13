@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[KMP算法]]></title>
+    <url>%2F2017%2F03%2Fkmp-note%2F</url>
+    <content type="text"><![CDATA[KMP算法用于字符串匹配，算法复杂度为 $\Theta (N)$ 对称性考虑目标串 abcdabcdabfcd 和模式串 abcdabf，可以发现当我们进行一次匹配后将在 f 处失配，在朴素算法中我们会将模式串后移一位重新匹配，但我们发现在模式串后面的 ab 和前面的 ab 是一样的，而 ab 在 f 之前已经匹配完成，所以我们可以直接将字符串匹配位置向后移动至 ab 处。 那么我们对于一个字符串只要知道其对称性就可以知道需要向后移动多少位。 next数组我们定义 next数组 中第 $i$ 个元素表示前 $i$ 个字符作为部分匹配串最长公共前后缀的长度，也就是我们之前提到的对称性。 例如对于前面提到的模式串，其next数组的值， a b c d a b f 0 0 0 0 1 2 0 递推求解next 如果 $next[i-1]$ 不为 $0$，并且当前字符与第 $next[i-1] + 1$ 个字符不相等，那么继续对比 $next[next[i-1]] + 1$个字符直至找到 $-1$； 否则如果当前字符与第 $next[i-1] + 1$ 个字符相等，那么 $next[i] = next[i-1]+1$ 匹配 如果当前字符匹配，继续匹配下一个字符； 如果当前字符不匹配，使当前模式串的前缀和目标串的匹配后缀对其。 代码12345678910111213141516171819202122#include &lt;cstdio&gt;#include &lt;cstring&gt;const int MAXN = 1008611;char target[MAXN + 7], pattern[MAXN + 7];int next [MAXN + 7];inline int KMP () &#123; int tl = strlen (target), pl = strlen (pattern); int count = 0; next[0] = -1; for (int i = 1, j; i &lt;= pl; next[i] = j + 1, i++) for (j = next[i - 1]; j != -1 &amp;&amp; pattern[j] != pattern[i - 1]; j = next[j]); for (int i = 0, j = 0; i &lt; tl; i++, j++, j == pl ? count ++ : 0) for (; j != -1 &amp;&amp; pattern[j] != target[i]; j = next[j]); return count;&#125;int n;int main () &#123; scanf ("%d", &amp;n); for (int i = 0; i &lt; n; i++) scanf ("%s%s", pattern, target), printf ("%d\n", KMP ());&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[图的割边]]></title>
+    <url>%2F2017%2F03%2Fcut-edge%2F</url>
+    <content type="text"><![CDATA[对于连通图 G，若删除其中的一条边 e，原图不再连通，则 e 是图 G 的一条割边。一个图可能有多条割边。 Tarjan算法类似于求解有向图强连通分量的 Tarjan算法， 我们定义 $ dfn (u) $ 表示在搜索树中访问到结点 u 的时间戳； $ low (u) $ 表示从结点 u 开始搜索，在搜索树上是 u 的祖先且 $ dfn(u) $ 最小的结点。 基础对于搜索树上的边 $ (u, v) $，如果 $ dfn (u) &lt; low (v) $，则这条边是割边。 $ dfn (u) &lt; low (v) $，即点 v 无法通过其他边访问到 u 的祖先。需要注意的是对于重边的处理，一般将一条无向边拆为两条有向边，但在遍历时只访问其一条边，例如无向边 $ (u, v) $ 可以分解为有向边 $ (u, v) $ 和 有向边 $ (v, u) $，在从结点 u 进行搜索时通过有向边 $ (u, v) $ 访问到结点 v，但在访问结点 v 时就不再通过有向边 $ (v, u) $ 访问结点 u （相当于直接访问原图的无向边），而如果有重边，便会由另一条有向边 $ (v, u) $ 访问到 结点 u， 这样会出现 $ dfn (u) \geq low (v) $，也就不是割边了。 代码1// 待更...]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>Tarjan</tag>
+        <tag>图论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[图的割点]]></title>
+    <url>%2F2017%2F03%2Fcut-vertex%2F</url>
+    <content type="text"><![CDATA[定义：对于无向图 G ，如果删除某个顶点 u 之后，连通分量的数目增加，则称 u 为图的割点。一个图可能有多个割点。 Tarjan算法类似于求解有向图强连通分量的 Tarjan算法， 我们定义 $ dfn (u) $ 表示在搜索树中访问到结点 u 的时间戳； $ low (u) $ 表示从结点 u 开始搜索，在搜索树上是 u 的祖先且 $ dfn(u) $ 最小的结点。 基础 对于搜索树上的根结点，如果它有两个或更多的子结点，那么它是割点； 对于搜索树上的非根结点，如果存在子结点 v 使得 $ dfn (u) \geq low (v)$，也就是 v 向上无法达到 u 的父结点，那么它是割点。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960// 递归版#include &lt;cstdio&gt;#include &lt;algorithm&gt;const int MAXN = 20000;struct Node &#123; int dfn, low, childCnt; struct Edge *edges; Node *father; bool vis, isCut;&#125; nodes[MAXN + 5];struct Edge &#123; Node *from, *to; Edge *next; Edge (Node *u, Node *v) : from (u), to (v), next (u-&gt;edges) &#123;&#125;&#125;;inline void AddEdge (const int s, const int t) &#123; nodes[s].edges = new Edge (nodes + s, nodes + t); nodes[t].edges = new Edge (nodes + t, nodes + s);&#125;int n, m, ans = 0, timeStamp = 0;inline void Tarjan (Node *v) &#123; v-&gt;vis = true; v-&gt;dfn = v-&gt;low = timeStamp++; int childCnt = 0; for (Edge *e = v-&gt;edges; e; e = e-&gt;next) &#123; if (!e-&gt;to-&gt;vis) &#123; e-&gt;to-&gt;father = v; Tarjan (e-&gt;to); v-&gt;low = std::min (v-&gt;low, e-&gt;to-&gt;low); if (v-&gt;father) &#123; if (e-&gt;to-&gt;low &gt;= v-&gt;dfn) v-&gt;isCut = true; &#125; else &#123; if (++childCnt == 2) v-&gt;isCut = true; &#125; &#125; else &#123; v-&gt;low = std::min (v-&gt;low, e-&gt;to-&gt;dfn); &#125; &#125;&#125;int main () &#123; scanf ("%d%d", &amp;n, &amp;m); for (int i = 0, u, v; i &lt; m; i++) &#123; scanf ("%d%d", &amp;u, &amp;v), --u, --v; AddEdge (u, v); &#125; for (int i = 0; i &lt; n; i++) &#123; if (!nodes[i].vis) Tarjan (nodes + i); if (nodes[i].isCut) printf ("%d ", i), ans++; &#125; printf ("%d\n", ans); return 0;&#125; 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889#include &lt;cstdio&gt;#include &lt;stack&gt;#include &lt;algorithm&gt;const int MAXN = 20000;struct Node &#123; int dfn, low, childCnt; struct Edge *edges; Node *father; bool vis, isCut;&#125; nodes[MAXN + 5];struct Edge &#123; Node *from, *to; Edge *next; Edge (Node *u, Node *v) : from (u), to (v), next (u-&gt;edges) &#123;&#125;&#125;;inline void AddEdge (const int s, const int t) &#123; nodes[s].edges = new Edge (nodes + s, nodes + t); nodes[t].edges = new Edge (nodes + t, nodes + s);&#125;struct StackInfo &#123; Node *v; Edge *e; void Setup (Node *x) &#123; v = x; e = v-&gt;edges; &#125;&#125; dfsInfo[MAXN], *tail = dfsInfo;int n, m, ans = 0;std::stack&lt;StackInfo *&gt; infoStack;inline void Tarjan () &#123; static int timeStamp = 0; for (int i = 0; i &lt; n; i++) if (!nodes[i].vis) &#123; tail-&gt;Setup (nodes + i); infoStack.push (tail++); while (!infoStack.empty ()) &#123; StackInfo *info = infoStack.top (); Node *v = info-&gt;v; if (!v-&gt;vis) &#123; v-&gt;vis = true; v-&gt;dfn = v-&gt;low = timeStamp++; &#125; Edge *&amp;e = info-&gt;e; if (e) &#123; if (!e-&gt;to-&gt;vis) &#123; e-&gt;to-&gt;father = v; tail-&gt;Setup (e-&gt;to); infoStack.push (tail++); &#125; else &#123; v-&gt;low = std::min (v-&gt;low, e-&gt;to-&gt;dfn); &#125; e = e-&gt;next; &#125; else &#123; if (v-&gt;father) &#123; v-&gt;father-&gt;low = std::min (v-&gt;father-&gt;low, v-&gt;low); if (v-&gt;father-&gt;father) &#123; if (v-&gt;low &gt;= v-&gt;father-&gt;dfn) v-&gt;father-&gt;isCut = true; &#125; else &#123; if (++v-&gt;father-&gt;childCnt == 2) v-&gt;father-&gt;isCut = true; &#125; &#125; infoStack.pop (); &#125; &#125; &#125;&#125;int main () &#123; scanf ("%d%d", &amp;n, &amp;m); for (int i = 0, u, v; i &lt; m; i++) &#123; scanf ("%d%d", &amp;u, &amp;v), --u, --v; AddEdge (u, v); &#125; Tarjan (); for (int i = 0; i &lt; n; i++) &#123; if (nodes[i].isCut) ans++; &#125; printf ("%d\n", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>Tarjan</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Tarjan 算法]]></title>
+    <url>%2F2017%2F03%2Ftarjan-note%2F</url>
+    <content type="text"><![CDATA[概述Tarjan 用于求解 有向图 的强连通分量。在有向图 G 中如果两个顶点 u、 v 之间相互可达，则称这两个点是强连通的。若 G 中任意两点是强连通的，则称图 G 是 强连通图。有向非强连通图的极大强连通子图称为强连通分量。极大的意义是，对于图 G 的一个极大强连通子图 K，当我们将原图 G 中任意一个非 K 结点加入 K 后，K 不再是一个强连通图。 求解Tarjan算法 的核心是对图 G 进行一遍深度优先搜索。强连通分量一定在当前搜索树的子树中。 准备 定义 $ dfn(u) $ 表示在搜索时访问到结点 u 的时间戳，即 u 是第几个被搜索到的； 定义 $ low(u) $ 表示从结点 u 开始搜索，在搜索树上是 u 的祖先且 $ dfn(u) $ 最小的结点。 根据这些定义，我们可以发现，在遍历完结点 u 的所有邻接点后，如果 $ dfn (u) = low (u) $ , 那么以 u 为起点的搜索子树即一个强连通分量。 计算我们在实现时将构造一个栈，在这个栈中存放当前搜索树上的结点，即当我们访问到一个点时将该点放入栈中。计算 $low(u)$： 如果邻接点 v 在栈中，也就是说该点是结点 u 的祖先，更新low (u) = \min (low (u), dfn (v)) 如果邻接点 v 没有被访问过，那么对 v 进行遍历，并在回溯后更新low (u) = \min (low (u), low (v)) 特别地，当邻接点 v 被访问过但不在栈中时我们不进行更新，因为此时结点 v 不是结点 u 的祖先，所以他们更不可能属于一个强连通分量 算法的时间复杂度为 $\Theta(N + M)$ 特别Tarjan 在实际应用中一般写为非递归形式，这是为了防止栈溢出。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990#include &lt;cstdio&gt;#include &lt;stack&gt;#include &lt;algorithm&gt;const int MAXN = 1e5 + 7;struct Node &#123; struct Edge *edges; int dfn, low; bool inStack, vis; Node () : edges (NULL), dfn (0), low (0), inStack (false), vis (false) &#123;&#125;&#125; nodes[MAXN];struct Edge &#123; Node *from, *to; Edge *next; Edge (Node *u, Node *v) : from (u), to (v), next (from-&gt;edges) &#123;&#125;&#125;;inline void AddEdge (const int s, const int t) &#123; nodes[s].edges = new Edge (nodes + s, nodes + t); //nodes[t].edges = new Edge (nodes + t, nodes + s);&#125;struct DFSInfo &#123; Node *v; Edge *e, *inEdge; void Setup (Node *x, Edge *fr = NULL) &#123; v = x; e = v-&gt;edges; inEdge = fr; &#125;&#125; dfsInfo[MAXN], *tail = dfsInfo;int n, m, ans = 0;std::stack&lt;Node*&gt; tarjanStack;std::stack&lt;DFSInfo*&gt; infoStack;inline void Tarjan () &#123; static int timeStamp = 0; for (int i = 0; i &lt; n; i++) if (!nodes[i].vis) &#123; tail-&gt;Setup (nodes + i); infoStack.push (tail++); while (!infoStack.empty ()) &#123; DFSInfo *info = infoStack.top (); Node *v = info-&gt;v; if (!v-&gt;vis) &#123; v-&gt;vis = true; v-&gt;dfn = v-&gt;low = timeStamp++; v-&gt;inStack = true; tarjanStack.push (v); &#125; Edge *&amp;e = info-&gt;e; if (e != NULL) &#123; if (e-&gt;to-&gt;inStack) &#123; v-&gt;low = std::min (v-&gt;low, e-&gt;to-&gt;dfn); &#125; else if (!e-&gt;to-&gt;vis) &#123; tail-&gt;Setup (e-&gt;to, e); infoStack.push (tail++); &#125; e = e-&gt;next; &#125; else &#123; if (v-&gt;low == v-&gt;dfn) &#123; // 以下属于同一强连通分量 for (Node *u = tarjanStack.top (); ; u = tarjanStack.top ()) &#123; u-&gt;inStack = false; tarjanStack.pop (); if (u == v) break; &#125; ans++; &#125; if (info-&gt;inEdge != NULL) &#123; info-&gt;inEdge-&gt;from-&gt;low = std::min (info-&gt;inEdge-&gt;from-&gt;low, v-&gt;low); &#125; infoStack.pop (); &#125; &#125; &#125;&#125;int main () &#123; scanf ("%d%d", &amp;n, &amp;m); for (int i = 0, u, v; i &lt; m; i++) &#123; scanf ("%d%d", &amp;u, &amp;v); AddEdge (--u, --v); &#125; Tarjan (); printf ("%d", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>Tarjan</tag>
+        <tag>图论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[树链剖分]]></title>
+    <url>%2F2017%2F01%2Fchain-split%2F</url>
+    <content type="text"><![CDATA[树链剖分常用于解决静态树上路径信息维护的问题，例如修改树上某条路径中所有结点的值，或是查询某路径中所有结点的和。假如说该树退化为一条链，这便成了区间修改、区间查询问题。如果我们能将树上的点按照某种方式组织起来，剖分成若干条链，则每条链相当于一个区间，此时便可用一些其他数据结构进行维护。 轻重边剖分定义 $size (u)$ 表示以 $u$ 为根的子树结点数目。 令 $v$ 为 $u$ 所有儿子结点中 $size$ 值最大的一个结点，则 $(u, v)$ 为重边，其他边为轻边。 性质 如果 $(u, v)$ 为轻边，则 $size (v) \leq size (u) \div 2$； 从根到某一结点 $v$ 的路径上轻边、重路径的个数不大于 $\log_2N$ ； 其中重路径的定义为全部由重边构成的路径。容易发现，一个点在且仅在一条重路径上。 分析考虑操作路径 $(u,v)$ ，我们可以分别处理他们到他们的最近公共祖先的路径。根据性质 2 我们可以知道路径最多分解最多 $O(log_2N)$ 条重路径和 $O(log_2N)$ 条轻边。对于重路径，他们相当于一个序列，所以我们可以直接用线段树等数据结构进行维护。而对于轻边我们可以直接跳过，因为轻边的两端点一定在某两条重路径上（单个结点也可以构成一条重路径），总时间复杂度为 $\Theta (M\log_2^2N)$ 实现轻重链剖分通过两次 dfs 实现，第一次求出每个结点的 $size$ 和 该结点的最大子树以及该结点的深度，第二次求出每个点所在的链以及其 dfn 的值。 我们要用到的 dfn ，实际上就是这个结点在剖分完之后对应的线段树中序列的编号，因此我们在实现的时候要优先访问最大子树的结点，以保证一条重路径上的点的 dfn 序相邻。 1if (v-&gt;maxChild) DFS_2 (v-&gt;maxChild); // 保证一条重路径上的dfn序相邻 在求链的时候我们会记录这条链的顶端点，也就是这条链中深度最低的点，这样我们就可以方便的对每一条链上进行求值。例如在进行求和 $(a,b)$ 操作：123456789101112int QuerySum (int a, int b) &#123; Node *u = nodes + a, *v = nodes + b; int res = 0; while (u-&gt;chain != v-&gt;chain) &#123; if (u-&gt;chain-&gt;top-&gt;depth &lt; v-&gt;chain-&gt;top-&gt;depth) std::swap (u, v); res += segt-&gt;QuerySum (u-&gt;chain-&gt;top-&gt;dfn, u-&gt;dfn); u = u-&gt;chain-&gt;top-&gt;father; &#125; if (u-&gt;depth &gt; v-&gt;depth) std::swap (u, v); res += segt-&gt;QuerySum (u-&gt;dfn, v-&gt;dfn); return res;&#125; 树的统计这是一道树链剖分模板题，单点修改，区间查询。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225226227228229230231232233234235236237238239240241242243244245246247248249250251252253254255256257258259#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &lt;climits&gt;const int MAXN = 300000;struct Node &#123; struct Edge *edges; struct Chain *chain; Node *father, *maxChild; int size, dfn, depth; bool vis;&#125; nodes[MAXN + 7];struct Edge &#123; Node *from, *to; Edge *next; Edge (Node *from, Node *to) : from (from), to (to), next (from-&gt;edges) &#123;&#125;&#125;;struct Chain &#123; Node *top; Chain (Node *top) : top (top) &#123;&#125;&#125;;inline void AddEdge (const int s, const int t) &#123; nodes[s].edges = new Edge (nodes + s, nodes + t); nodes[t].edges = new Edge (nodes + t, nodes + s);&#125;inline void DFS_1 (Node *v) &#123; v-&gt;vis = true; v-&gt;size = 1; for (Edge *e = v-&gt;edges; e; e = e-&gt;next) &#123; if (!e-&gt;to-&gt;vis) &#123; e-&gt;to-&gt;father = v; e-&gt;to-&gt;depth = v-&gt;depth + 1; DFS_1 (e-&gt;to); v-&gt;size += e-&gt;to-&gt;size; if (!v-&gt;maxChild || e-&gt;to-&gt;size &gt; v-&gt;maxChild-&gt;size) v-&gt;maxChild = e-&gt;to; &#125; &#125;&#125; inline void DFS_2 (Node *v) &#123; static int ts = 0; v-&gt;dfn = ++ts; if (!v-&gt;father || v != v-&gt;father-&gt;maxChild) v-&gt;chain = new Chain (v); else v-&gt;chain = v-&gt;father-&gt;chain; if (v-&gt;maxChild) DFS_2 (v-&gt;maxChild); // 保证一条重路径上的dfn序相邻 for (Edge *e = v-&gt;edges; e; e = e-&gt;next) &#123; if (e-&gt;to-&gt;father == v &amp;&amp; e-&gt;to != v-&gt;maxChild) DFS_2 (e-&gt;to); &#125;&#125;inline void Split () &#123; nodes[1].depth = 1; DFS_1 (nodes + 1); DFS_2 (nodes + 1);&#125;struct SegmentTree &#123; int l, r, mid; SegmentTree *lc, *rc; int sum, max; SegmentTree (int l, int r, SegmentTree *lc, SegmentTree *rc) : l (l), r (r), mid (l + (r - l) / 2), lc (lc), rc (rc), sum (0), max (INT_MAX) &#123;&#125; void Maintain () &#123; sum = lc-&gt;sum + rc-&gt;sum; max = std::max (lc-&gt;max, rc-&gt;max); &#125; void Update (int pos, int x) &#123; if (l == r) sum = max = x; else if (pos &lt;= mid) lc-&gt;Update (pos, x), Maintain (); else rc-&gt;Update (pos, x), Maintain (); &#125; int QuerySum (int l, int r) &#123; if (this-&gt;l &gt; r || this-&gt;r &lt; l) return 0; else if (l &lt;= this-&gt;l &amp;&amp; r &gt;= this-&gt;r) return sum; else return lc-&gt;QuerySum (l, r) + rc-&gt;QuerySum (l, r); &#125; int QueryMax (int l, int r) &#123; if (this-&gt;l &gt; r || this-&gt;r &lt; l) return INT_MIN; else if (l &lt;= this-&gt;l &amp;&amp; r &gt;= this-&gt;r) return max; else return std::max (lc-&gt;QueryMax (l, r), rc-&gt;QueryMax (l, r)); &#125; static SegmentTree *Build (int l, i#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &lt;climits&gt;const int MAXN = 300000;struct Node &#123; struct Edge *edges; struct Chain *chain; Node *father, *maxChild; int size, dfn, depth; bool vis;&#125; nodes[MAXN + 7];struct Edge &#123; Node *from, *to; Edge *next; Edge (Node *from, Node *to) : from (from), to (to), next (from-&gt;edges) &#123;&#125;&#125;;struct Chain &#123; Node *top; Chain (Node *top) : top (top) &#123;&#125;&#125;;inline void AddEdge (const int s, const int t) &#123; nodes[s].edges = new Edge (nodes + s, nodes + t); nodes[t].edges = new Edge (nodes + t, nodes + s);&#125;inline void DFS_1 (Node *v) &#123; v-&gt;vis = true; v-&gt;size = 1; for (Edge *e = v-&gt;edges; e; e = e-&gt;next) &#123; if (!e-&gt;to-&gt;vis) &#123; e-&gt;to-&gt;father = v; e-&gt;to-&gt;depth = v-&gt;depth + 1; DFS_1 (e-&gt;to); v-&gt;size += e-&gt;to-&gt;size; if (!v-&gt;maxChild || e-&gt;to-&gt;size &gt; v-&gt;maxChild-&gt;size) v-&gt;maxChild = e-&gt;to; &#125; &#125;&#125; inline void DFS_2 (Node *v) &#123; static int ts = 0; v-&gt;dfn = ++ts; if (!v-&gt;father || v != v-&gt;father-&gt;maxChild) v-&gt;chain = new Chain (v); else v-&gt;chain = v-&gt;father-&gt;chain; if (v-&gt;maxChild) DFS_2 (v-&gt;maxChild); // 保证一条重路径上的dfn序相邻 for (Edge *e = v-&gt;edges; e; e = e-&gt;next) &#123; if (e-&gt;to-&gt;father == v &amp;&amp; e-&gt;to != v-&gt;maxChild) DFS_2 (e-&gt;to); &#125;&#125;inline void Split () &#123; nodes[1].depth = 1; DFS_1 (nodes + 1); DFS_2 (nodes + 1);&#125;struct SegmentTree &#123; int l, r, mid; SegmentTree *lc, *rc; int sum, max; SegmentTree (int l, int r, SegmentTree *lc, SegmentTree *rc) : l (l), r (r), mid (l + (r - l) / 2), lc (lc), rc (rc), sum (0), max (INT_MAX) &#123;&#125; void Maintain () &#123; sum = lc-&gt;sum + rc-&gt;sum; max = std::max (lc-&gt;max, rc-&gt;max); &#125; void Update (int pos, int x) &#123; if (l == r) sum = max = x; else if (pos &lt;= mid) lc-&gt;Update (pos, x), Maintain (); else rc-&gt;Update (pos, x), Maintain (); &#125; int QuerySum (int l, int r) &#123; if (this-&gt;l &gt; r || this-&gt;r &lt; l) return 0; else if (l &lt;= this-&gt;l &amp;&amp; r &gt;= this-&gt;r) return sum; else return lc-&gt;QuerySum (l, r) + rc-&gt;QuerySum (l, r); &#125; int QueryMax (int l, int r) &#123; if (this-&gt;l &gt; r || this-&gt;r &lt; l) return INT_MIN; else if (l &lt;= this-&gt;l &amp;&amp; r &gt;= this-&gt;r) return max; else return std::max (lc-&gt;QueryMax (l, r), rc-&gt;QueryMax (l, r)); &#125; static SegmentTree *Build (int l, int r) &#123; int mid = l + (r - l) / 2; return l == r ? new SegmentTree (l, r, NULL, NULL) : new SegmentTree (l, r, Build (l, mid), Build (mid + 1, r)); &#125;&#125; *segt;inline void Update (int u, int x) &#123; segt-&gt;Update (nodes[u].dfn, x);&#125;inline int QuerySum (int a, int b) &#123; Node *u = nodes + a, *v = nodes + b; int res = 0; while (u-&gt;chain != v-&gt;chain) &#123; if (u-&gt;chain-&gt;top-&gt;depth &lt; v-&gt;chain-&gt;top-&gt;depth) std::swap (u, v); res += segt-&gt;QuerySum (u-&gt;chain-&gt;top-&gt;dfn, u-&gt;dfn); u = u-&gt;chain-&gt;top-&gt;father; &#125; if (u-&gt;depth &gt; v-&gt;depth) std::swap (u, v); res += segt-&gt;QuerySum (u-&gt;dfn, v-&gt;dfn); return res;&#125;inline int QueryMax (int a, int b) &#123; Node *u = nodes + a, *v = nodes + b; int res = INT_MIN; while (u-&gt;chain != v-&gt;chain) &#123; if (u-&gt;chain-&gt;top-&gt;depth &lt; v-&gt;chain-&gt;top-&gt;depth) std::swap (u, v); res = std::max (res, segt-&gt;QueryMax (u-&gt;chain-&gt;top-&gt;dfn, u-&gt;dfn)); u = u-&gt;chain-&gt;top-&gt;father; &#125; // change to dfn? if (u-&gt;depth &gt; v-&gt;depth) std::swap (u, v); res = std::max (res, segt-&gt;QueryMax (u-&gt;dfn, v-&gt;dfn)); return res;&#125;int main () &#123; int n, q; scanf ("%d", &amp;n); for (int i = 1, u, v; i &lt; n; i++) &#123; scanf ("%d%d", &amp;u, &amp;v); AddEdge (u, v); &#125; Split (); segt = SegmentTree::Build (1, n); for (int i = 1, x; i &lt;= n; i++) &#123; scanf ("%d", &amp;x); Update (i, x); &#125; char cmd[15]; int a, b; scanf ("%d", &amp;q); while (q--) &#123; scanf ("%s%d%d", cmd, &amp;a, &amp;b); if (cmd[1] == 'H') Update (a, b); else if (cmd[1] == 'S') printf ("%d\n", QuerySum (a, b)); else printf ("%d\n", QueryMax (a, b)); &#125;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>树链剖分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「UVa679」Dropping Balls]]></title>
+    <url>%2F2016%2F11%2Fdropping-balls%2F</url>
+    <content type="text"><![CDATA[题目描述有一棵具有 $2^D-1$ 个节点的二叉树， $I$ 个小球，每个节点是一个开关，默认为关，小球每到一个点上会改变该点的状态为相反的状态，若此时开关为开则向左移动，若为关则向右移动。问第 $I$ 个小球最终会下落到几号节点。 题目链接 如图，$D = 4$，$I = 2$，第 $1$ 个小球会经过 $1, 2, 4, 8$，第 $2$ 个小球会经过 $1,3，6，12$ 从而最终到达 $12$ 号点。 暴力模拟很自然可以想到进行暴力模拟，每到达一个节点就改变该点的开关状态。这样每组数据可以达到 $2 ^ {19} \times 19$ 次运算，最多仅有 $1000$ 组数据，所以暴力会 TLE，如果你这么做了，你可能会看见下面的这张图： 另外不要问我这张图怎么来的 分析考虑对于根节点及其左右子树，如果当前的小球是第奇数次个到达根节点，那么它肯定要向左走，否则向右走（开关只有两种状态…）。推广到其他节点，如果这个小球是第奇数个到达这个节点，那么相应的这个开关目前处于开启状态，否则处于关闭状态。如果当前小球编号为 $I$，那么它是第 $I / 2$ 或 $(I + 1) / 2$个到达子节点的小球（画一画就出来了）。 简单的说，就是知道小球编号的奇偶性就能知道下一步是向左走还是向右走了。 代码12345678910111213141516171819#include &lt;cstdio&gt;#include &lt;algorithm&gt;int main () &#123; int t, n, d, ans; scanf ("%d", &amp;t); while (t--) &#123; scanf ("%d %d", &amp;d, &amp;n); ans = 1; for (register int i = 1; i &lt; d; i++) &#123; if (n % 2) &#123; ans = ans * 2, n = (n + 1) / 2; &#125; else &#123; ans = ans * 2 + 1, n = n / 2; &#125; &#125; printf ("%d\n", ans); &#125;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>UVa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[左偏树]]></title>
+    <url>%2F2016%2F11%2Fleft-tree%2F</url>
+    <content type="text"><![CDATA[左偏树是一种可并堆，这使得他满足堆的性质，也能在 $\Theta (\log_2N)$ 的时间内合并两个堆。 除了堆中应存储的键值、左右子树之外，左偏树还保存一个距离值 dist，这表示结点到他子树中第一个外结点所经过的边数。其中外结点的定义为左子树或右子树为空的结点。 性质 结点的键值小于或等于其左右子树的键值，也就是堆性质。 结点的左子结点的 dist 值不小于其右子结点的 dist 值，这将用于堆的合并操作。 结点的 dist 值等于其右子结点的 dist 值 + 1。 操作合并操作合并操作是左偏树的基础，例如合并 $A, B$ 两棵左偏树，有两种情况： 一棵为空树，则直接返回另一棵树； 12if (!a) return b;if (!b) return a; 若 $A,B$ 非空，且 $A$ 的键值小于 $B$ 的键值，则合并 $A$ 的右子树； 12if (a-&gt;c &gt; b-&gt;c) std::swap (a, b);a-&gt;rc = Merge (a-&gt;rc, b); 接着，为了维护左偏树的左偏性质，我们需要更新结点的 dist 值。1234if (!a-&gt;lc || a-&gt;lc-&gt;dist &lt; a-&gt;rc-&gt;dist) std::swap (a-&gt;lc, a-&gt;rc);a-&gt;dist = a-&gt;rc ? a-&gt;rc-&gt;dist + 1 : 0;a-&gt;Update ();return a; 插入操作我们将需要插入的结点看作一棵只有一个结点的左偏树，直接合并即可。 删除根结点直接合并其左右子树即可。 例题「APIO2012」Dispatching给定一棵 $n$ 个结点的有根树，每个结点有 $Ci$ 和 $Li$ ，预算为 $M$，在该树中选择一个以 $R$ 为根的子树，并在其中选择一些结点，使得这些结点的 $Ci$ 的和不超过 $M$ ，但人数尽量多。 分析深搜至子结点，结点处建立一棵左偏树，维护最大值，将不同结点处的左偏树合并，若左偏树的值大于了 $M$ 则将堆顶元素弹出。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &lt;queue&gt;struct LeftTree &#123; LeftTree *lc, *rc; long long dist, sum, c, size; LeftTree (long long c) : c (c) , lc (NULL), rc (NULL), dist (0), sum (c), size (1) &#123;&#125; void Update () &#123; size = (lc ? lc-&gt;size : 0) + (rc ? rc-&gt;size : 0) + 1; sum = (lc ? lc-&gt;sum : 0) + (rc ? rc-&gt;sum : 0) + c; &#125; static LeftTree *Merge (LeftTree *a, LeftTree *b) &#123; if (!a) return b; if (!b) return a; if (a-&gt;c &lt; b-&gt;c) std::swap (a, b); a-&gt;rc = Merge (a-&gt;rc, b); if (!a-&gt;lc || a-&gt;lc-&gt;dist &lt; a-&gt;rc-&gt;dist) std::swap (a-&gt;lc, a-&gt;rc); a-&gt;dist = a-&gt;rc ? a-&gt;rc-&gt;dist + 1 : 0; a-&gt;Update (); return a; &#125;&#125;;const int MAXN = 100000;struct Node &#123; struct Edge *edges; int c, l; LeftTree *lt;&#125; nodes[MAXN + 3], *id[MAXN + 5];struct Edge &#123; Node *from, *to; Edge *next; Edge (Node *u, Node *v) : from (u), to (v), next (from-&gt;edges) &#123;&#125;&#125;;inline void AddEdge (const int s, const int t) &#123; nodes[s].edges = new Edge (nodes + s, nodes + t);&#125;inline void BFS () &#123; std::queue&lt;Node *&gt; qs; qs.push (nodes + 1); for (int cnt = 1; !qs.empty (); cnt++) &#123; Node *v = qs.front (); qs.pop (); id[cnt] = v; for (Edge *e = v-&gt;edges; e; e = e-&gt;next) &#123; qs.push (e-&gt;to); &#125; &#125;&#125;int main () &#123; int n, m; long long ans = 0; scanf ("%d%d", &amp;n, &amp;m); for (int i = 1, fa; i &lt;= n; i++) &#123; scanf ("%d", &amp;fa); if (fa) AddEdge (fa, i); scanf ("%d%d", &amp;nodes[i].c, &amp;nodes[i].l); nodes[i].lt = new LeftTree (nodes[i].c); &#125; BFS (); for (int i = n; i&gt;= 1; i--) &#123; Node *v = id[i]; for (Edge *e = v-&gt;edges; e; e = e-&gt;next) v-&gt;lt = LeftTree::Merge (v-&gt;lt, e-&gt;to-&gt;lt); while (v-&gt;lt-&gt;sum &gt; m) v-&gt;lt = LeftTree::Merge (v-&gt;lt-&gt;lc, v-&gt;lt-&gt;rc); ans = std::max (ans, v-&gt;lt-&gt;size * v-&gt;l); &#125; printf ("%lld\n", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>可并堆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「UVa442」Matrix Chain Multiplication]]></title>
+    <url>%2F2016%2F11%2Fmatrix-chain-multiplication%2F</url>
+    <content type="text"><![CDATA[题目描述给定 $n (1 \leq n \leq 26)$ 个矩阵以及一些矩阵链乘表达式，求每一个表达式的运算次数。 解析表达式题目中的输入是诸如 $(((((DE)F)G)H)I)$ 的表达式。 SecondPart = Line { Line } Line = Expression Expression = Matrix | “(“ Expression Expression “)”Matrix = “A” | “B” | “C” | … | “X” | “Y” | “Z” 因为输入均合法，所以我们不需要在括号匹配上深究，由输入格式知，括号内的元素恒为一对，这也就是说我们只需要一个用来存储数字的栈就可以了。当我们遇到 ) 时，弹出两个栈顶元素并进行运算即可。 简单的括号匹配输入一个字符串，这个字符串由 ( 和 ) 构成，判断括号是否能够匹配。 分析由于做这题之前做了半小时的括号匹配，遇到 ( 时将 ( 压栈，遇到 ) 时栈非空时出栈，判断栈内是否有剩余元素。代码略… 代码12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;iostream&gt;#include &lt;stack&gt;#define maxn 26struct Matrix &#123; int a, b; Matrix (int a = 0, int b = 0) : a (a), b (b) &#123;&#125;&#125; nodes[maxn];int main () &#123; std::ios::sync_with_stdio (false); int n = 0; std::cin &gt;&gt; n; for (register int i = 0; i &lt; n; i++) &#123; char ch; std::cin &gt;&gt; ch; std::cin &gt;&gt; nodes[ch - 'A'].a &gt;&gt; nodes[ch - 'A'].b; &#125; std::stack&lt;Matrix&gt; stk; std::string str; while (std::cin &gt;&gt; str) &#123; int ans = 0; bool flag = false; for (register int i = 0; i &lt; str.length (); i++) &#123; if (str[i] == '(') continue; else if (str[i] == ')') &#123; Matrix ta = stk.top (); stk.pop (); Matrix tb = stk.top (); stk.pop (); if (ta.a != tb.b) &#123; flag = true; break; &#125; ans += ta.b * tb.b * tb.a; stk.push (Matrix (tb.a, ta.b)); &#125; else stk.push (nodes[str[i] - 'A']); &#125; while (!stk.empty ()) stk.pop (); if (flag) std::cout &lt;&lt; "error\n"; else std::cout &lt;&lt; ans &lt;&lt; '\n'; &#125;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[std::bitset 笔记]]></title>
+    <url>%2F2016%2F11%2Fbitset-note%2F</url>
+    <content type="text"><![CDATA[我们可以使用 bitset 来进行一些位运算，它使得位运算更加简单。特别是 bitset 可以处理超过 unisigned long long 的位大小的位集合。用 bitset 来代替 bool 数组将减少很大的空间。 定义及初始化在头文件 &lt;bitset&gt; 定义12template&lt; std::size_t N &gt;class bitset; 当我们定义一个 bitset 时要说明其包含多少个二进制位1bitset&lt;8&gt; bs; 这指明 bs 含有 8 个二进制位，将其输出：00000000 初始化 说明 bitset&lt;n&gt; bs; 声明 bs 有 $n$ 位，每一位均为 $0$ ，构造函数为 $constexpr$ bitset&lt;n&gt; bs (u); $u$ 为一个 unsigned long long 类型，如果 $n$ 大于 unsigned long long 的大小，则 bs 中超出 unsigned long long 的部分用 $0$ 填充，构造函数为 $constexpr$ bitset&lt;n&gt; bs (s/cp, pos, m, zero, one); 从字符串 $s$ 或 C风格字符串 $cp$ 中拷贝 $m$ 个字符，zero 和 one 分别表示在这个字符串中的 $0$ 和 $1$ 用哪个字符表示 测试1234567891011121314151617#include &lt;iostream&gt;#include &lt;bitset&gt;#include &lt;climits&gt;int main () &#123; std::bitset&lt;32&gt; bs_1; std::cout &lt;&lt; bs_1 &lt;&lt; ", size:" &lt;&lt; sizeof (bs_1) &lt;&lt; '\n'; // =&gt; size: 4 std::bitset&lt;64&gt; bs_2; std::cout &lt;&lt; bs_2 &lt;&lt; ", size:" &lt;&lt; sizeof (bs_2) &lt;&lt; '\n'; // =&gt; size: 8 std::bitset&lt;3&gt; bs_3 (7); std::cout &lt;&lt; bs_3 &lt;&lt; '\n'; // string 的下标习惯与bitset相反 std::bitset&lt;32&gt; bs_4 ("1100"); // -std=c++11 std::cout &lt;&lt; bs_4 &lt;&lt; '\n'; &#125; 操作首先 bitset 支持位运算（废话），与内置用于 unsigned long long 含义相同。 函数 说明 bs.any() 是否存在已置位的二进位 bs.all() 是否每一位均已置位 bs.none() 是否不存在已经置位的二进制位 bs.count() bs中已置位的二进制位的位数 bs.size() $constexpr$ 函数，返回bs的位数 bs.test(pos) 判断pos处是否已置位 bs.set(pos, v = true) 设置pos处的值为 true 或 false bs.reset() 将bs中所有位复位 bs.reset(pos) 将pos处复位 bs.flip() 改变bs中各位的状态 bs.flip(pos) 改变pos处状态 bs[pos] 访问pos处的值 bs.to_ulong()/bs.to_ullong() 返回一个unsigned long 或 unsigned long long类型的值，其二进制位与bs相同 bs.to_string(zero, one) 返回bs位模式的字符串 os &lt;&lt; bs 将bs打印为 0、1 is &lt;&lt; bs 从流中读入，当超过其大小或下个字符非 0 或 1 时终止 接收邻接矩阵123456789101112131415161718192021#include &lt;iostream&gt;#include &lt;bitset&gt;#define maxn 1001int main () &#123; std::bitset&lt;maxn&gt; G[maxn]; int n, m; std::cin &gt;&gt; n &gt;&gt; m; for (int i = 0, u, v; i &lt; m; i++) &#123; std::cin &gt;&gt; u &gt;&gt; v; G[u][v] = true; G[v][u] = true; &#125; for (int i = 0; i &lt; n; i++) &#123; for (int j = 0; j &lt; n; j++) &#123; std::cout &lt;&lt; G[i][j] &lt;&lt; ' '; &#125; std::cout &lt;&lt; '\n'; &#125; return 0;&#125; 输入及输出 5 31 22 33 50 0 0 0 00 0 1 0 00 1 0 1 00 0 1 0 00 0 0 0 0]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>STL</tag>
+        <tag>bitset</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[差分思想及应用]]></title>
+    <url>%2F2016%2F11%2Fdifference%2F</url>
+    <content type="text"><![CDATA[一维差分有一个序列，$m$ 次操作，每次操作将区间 $[L,R]$ 中的数字加 $x$，输出这个序列。 引入如果数据范围很小，可以直接进行模拟，但如果数据范围很大的话，可以考虑线段树。一种更简单的做法：使用差分的思想。在开始前，要接触前缀和的概念。 前缀和设前缀和 $sum(i)$ 表示原数组从第 $1$ 个到第 $i$ 个的值得和。设原数组为 $A$，也就是说： sum(i)= \sum\limits_{k=1}^i A_k 类型/i 0 1 2 3 4 5 6 7 8 9 原数组 3 5 7 -5 -3 2 5 12 -16 13 前缀和 3 8 15 10 7 9 14 26 10 23 前缀和可以用来快速求和，这也是使用差分思想的工具。 差分我们要用到一个新的数组（当然你也可以直接修改原数组），我们把这个数组叫做差分数组，这个数组表示在某个区间内进行修改的值。例如我们要对 $[3,5]$ 这个区间中的每个元素增加 $1$，我们可以用差分数组（设为 $C$ ）这样表示： $C_3 + 1, C_6 - 1$，这样我们对差分数组做前缀和，就可以得到其原数组每个元素最后增加的值。 类型/i 0 1 2 3 4 5 6 7 8 9 10 原数组 3 5 7 -5 -3 2 5 12 -16 13 前缀和 3 8 15 10 7 9 14 26 10 23 差分数组 0 0 0 +1 0 0 -1 0 0 0 0 差分前缀和 0 0 0 1 1 1 0 0 0 0 同理，我们如果要进行多次操作，只要修改差分数组即可，修改是 $\Theta (1)$ 的，而做前缀和是 $\Theta (n)$ 的。 差分数组比普通数组多了一个元素，考虑 $R$ 为原数组最后一个元素时， 那么我们在差分数组中需要在 $R-1$ 位置恢复我们的修改，多一个元素其实是为了防止数组越界。当然，你可以进行特判来避免数组越界 代码123456789101112#include &lt;cstdio&gt;#define maxn 10001int main () &#123; static int C[maxn + 1] = &#123;0&#125;, A[maxn]; int n, m, L, R, x; // 序列大小，询问次数，左右区间，增量 scanf ("%d%d", &amp;n, &amp;m); for (register int i = 0; i &lt; n; i++) scanf ("%d", A + i); for (register int i = 0; i &lt; m; i++) scanf ("%d%d%d", &amp;L, &amp;R, &amp;x), C[L] += x, C[R + 1] -= x; for (register int i = 0; i &lt; n; i++) C[i] += C[i - 1], A[i] = A[i] + C[i], printf ("%d ", A[i]); return 0;&#125; 二维差分有 $n\times m$ 的矩阵，每次修改其中一个子矩阵，输出最后的矩阵。 引入有了一维差分的思想，很容易想到这或许也可以进行差分。很容易想到，把这个矩阵分成 $n$ 行，每一行都是一个序列，这样就可以当做一维差分来做。但这样做可能会超时，所以我们需要换一种思路进行二维差分。 二维前缀和设 $sum(i,j)$ 表示从 $(0,0)$ 到 $(i,j)$ 所包含的矩形区域的和。 例如，求图中红色格子所代表的前缀和的值，设为 $sum(i,j)$ ，则$sum(i-1,j)$ 为橙色部分加紫色部分），$sum(i, j-1)$ 为绿色部分加紫色部分，$sum(i-1,j-1)$为紫色部分， 显然，$sum(i,j)$ 为图中绿色部分加紫色部分加橙色部分加上这个格子本身的值。 $sum(i,j) = sum(i-1, j) + sum(i, j-1) - sum(i-1,j-1)$ 差分假如我们要对图中绿色区域进行 +1s 的操作，只需要对差分数组按照如图位置进行修改即可。 然后我们对差分数组求前缀和即可得到原矩阵被修改后的样子。 为什么要这么差分？考虑图中红色部分 +1s 后再求前缀和将影响哪些区域。显然，图中紫色方框内的元素在进行前缀和运算时会受到影响，因为他们的 $sum$ 的值包含了红色格子，而红色格子被 +1s了。同理其他格子也是一样，可以发现像这样差分后影响的只有图中绿色区域。 例题[地毯-洛谷3397] 在 $n\times n$ 的格子上有 $m$ 个地毯。给出这些地毯的信息，问每个点被多少个地毯覆盖。 样例输入 5 3 2 2 3 3 3 3 5 5 1 2 1 4 样例输出 0 1 1 1 0 0 1 1 0 0 0 1 2 1 1 0 0 1 1 1 0 0 1 1 1 暴力可过，差分即可. 代码1234567891011121314151617181920#include &lt;cstdio&gt;#define maxn 1003int n, m, a[maxn][maxn], c[maxn][maxn];int main () &#123; scanf ("%d %d", &amp;n, &amp;m); for (register int i = 0, x1, y1, x2, y2; i &lt; m; i++) &#123; scanf ("%d%d%d%d", &amp;x1, &amp;y1, &amp;x2, &amp;y2); c[x1][y1]++, c[x1][y2 + 1]--, c[x2 + 1][y1]--, c[x2 + 1][y2 + 1]++; &#125; for (register int i = 1; i &lt;= n; i++) &#123; for (register int j = 1; j &lt;= n; j++) &#123; a[i][j] = c[i][j] + a[i - 1][j] + a[i][j - 1] - a[i - 1][j - 1]; printf ("%d ", a[i][j]); &#125; putchar ('\n'); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>差分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「UVa10820」Send a Table]]></title>
+    <url>%2F2016%2F11%2Fsend-a-table%2F</url>
+    <content type="text"><![CDATA[题目描述已知通过 $f(x,y)$ 可以计算 $f(x \times k, y \times k), k\in N^*$ ，求最少需要多少个 $f(x,y)$ 使得任意 $x, y \in [1,n]$ 均能够被计算出来。 题解若 $x,y$ 不互质，则会有相应的 $\gcd (x, y) \not = 1$，将 $x, y$ 除以 $\gcd (x, y)$ 后 $x$ 与 $y$ 互质。因此只要求在 $n$ 以内有多少对互质的数即可。特别的，除了 $x = 1, y = 1$ 外其他的 $x,y$ 均不相等。满足 $x &lt; y$ 的 $f(n) = \varphi(2) + \varphi(3) + \dots + \varphi (n)$， 满足 $y &lt; x$ 的 $f(n) = \varphi(2) + \varphi(3) + \dots + \varphi (n)$ ， 满足 $x = y$ 的 $f(n) = 1$综上，$f(n) = 2 \times (\varphi (2) + \varphi (3) + \dots + \varphi (n)) + 1$ 代码12345678910111213141516171819202122#include &lt;cstdio&gt;#define maxn 50001int phi[maxn], sum[maxn];void Phi_Table (int n) &#123; phi[1] = 1; for (int i = 2; i &lt;= n; i++) if (!phi[i]) &#123; for (int j = i; j &lt;= n; j += i) &#123; if (!phi[j]) phi[j] = j; phi[j] = phi[j] / i * (i - 1); &#125; &#125;&#125;int main () &#123; Phi_Table (maxn - 1); for (register int i = 2; i &lt;= maxn; i++) sum[i] = phi[i] + sum[i - 1]; int n = 0; while (scanf ("%d", &amp;n) &amp;&amp; n) &#123; printf ("%d\n", 2 * sum[n] + 1); &#125;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+        <tag>欧拉函数</tag>
+        <tag>UVa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[欧拉函数]]></title>
+    <url>%2F2016%2F11%2Feuler-note%2F</url>
+    <content type="text"><![CDATA[欧拉函数欧拉函数定义为小于等于n的数中与n互质的数的数目。设 $n$ 的唯一分解式：$n = p_1^{a_1}p_2^{a_2}p_3^{a_3}\dots p_k^{a_k}$。 利用容斥原理可以证明（反正我不会qwq）： \phi (n)=n(1-\frac 1 p_1)(1-\frac 1 p_2) \dots(1-\frac 1 p_k)代码12345678910int euler_phi (int n) &#123; int m = (int)sqrt (n + 0.5); int ans = n; for (int i = 2; i &lt;= m; i++) if (n % i == 0) &#123; ans = ans / i * (i - 1); while (n % i == 0) n /= i; &#125; if (n &gt; 1) ans = ans / n * (n - 1); return ans;&#125; 使用筛法若只有一个询问，求欧拉函数的时间复杂度为 $\Theta(\sqrt n)$。使用筛法可以使用 $\Theta(n\log\log n)$ 的玄学复杂度打出一张表。对于当前的 $i$，若此时 $\varphi[i]$ 为 $0$，那么更新其倍数。 代码1234567891011int phi[maxn];void phi_table (int n) &#123; for (register int i = 2; i &lt;= n; i++) phi[i] = 0; phi[1] = 1; for (register int i = 2; i &lt;= n; i++) if (!phi[i]) &#123; for (register int j = i; j &lt;= n; j += i) &#123; if (!phi[j]) phi[j] = j; phi[j] = phi[j] / i * (i - 1); &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+        <tag>欧拉函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「UVa10375」Choose and Divide]]></title>
+    <url>%2F2016%2F11%2Fuva10375%2F</url>
+    <content type="text"><![CDATA[题目描述已知 $C(m, n) = m! \div (n! \times (m-n)!)$，求$C(p,q)\div C(r,s)$，其中 $p,q,r,s \leq 10000$ 分析使用唯一分解定理，将 $C(p,q)\div C(r,s)$ 的结果分解为若干素数相乘，并存储于数组 $e$ 中。 考虑如何得到 $e$。就像， $2^5 * 2^6 = 2^{11}$，利用唯一分解定理将乘数分解，并把它像上面的式子一样加入数组 $e$ 。 12345678int d = 1;for (register int j = 0, k = n; j &lt; primes.size (); j++) &#123; while (k % primes[j] == 0) &#123; k /= primes[j]; e[j] += d; &#125; if (k == 1) break;&#125; 乘法运算在上面的代码中 $n$ 是我们要乘进数组 $e$ 中的数，所以我们把 $n$ 分解，而 $d = 1$ 时表示乘，相应的 $d = -1$ 时表示除。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &lt;cstring&gt;#include &lt;vector&gt;#include &lt;cmath&gt;#define maxn 10001static int e[maxn], p, q, r, s;std::vector&lt;int&gt; primes;inline void AddFactorial (int n, int d) &#123; for (register int i = 1; i &lt;= n; i++) &#123; for (register int j = 0, k = i; j &lt; primes.size (); j++) &#123; while (k % primes[j] == 0) &#123; k /= primes[j]; e[j] += d; &#125; if (k == 1) break; &#125; &#125;&#125;int main () &#123; static bool vis[maxn]; for (register int i = 2; i &lt;= 10000; i++) if (!vis[i]) for (register int j = i * i; j &lt;= 10000; j += i) vis[j] = true; for (register int i = 2; i &lt;= 10000; i++) if (!vis[i]) primes.push_back (i); while (scanf ("%d%d%d%d", &amp;p, &amp;q, &amp;r, &amp;s) == 4) &#123; memset (e, 0, sizeof (e)); AddFactorial (p, 1); AddFactorial (q, -1); AddFactorial (p - q, -1); AddFactorial (r, -1); AddFactorial (s, 1); AddFactorial (r - s, 1); double ans = 1; for (register int i = 0; i &lt; primes.size (); i++) if (e[i]) &#123; ans *= pow (primes[i], e[i]); &#125; printf ("%.5lf\n", ans); &#125;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+        <tag>UVa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「NOIP2012」同余方程]]></title>
+    <url>%2F2016%2F11%2Fnoip-2012-d2t1%2F</url>
+    <content type="text"><![CDATA[简序对于$a \equiv b \pmod n$，它表示 $a$ 和 $b$ 在模意义下除以 $n$ 的余数相等。模意义也就是进行取模运算，而非取余运算，如$-1 \equiv 2 \pmod 3$。 同余：如果两个整数 $a$ 和 $b$ 满足 $(a-b) $ 能够被整数 $n$ 整除，即 $(a-b)/n$ 得到一个整数，那么就称整数 $a$ 与 $b$ 对模 $n$ 同余 若 $a \equiv b \pmod n $，则 $a \mod n = b \mod n$，则 $(a - b) \mod n = 0$，也就是说 $a \equiv b \pmod n$，$a-b$是 $n$ 的整数倍。 同余方程求关于 $x$ 同余方程 $ax \equiv 1 \pmod b$的最小正整数解。 样例输入 样例输出 3 10 7 题解若 $ax \equiv 1 \pmod b$， 即 $ax - 1$ 是 $b$ 的整数倍，这样题目变成了 $ax - 1 = by$ ，也就是 $ax - by = 1$使用扩欧即可求出 $ax - by = \gcd(a,b)$ 的一组解。 若方程 $ax + by = \gcd(a,b)$ 的一组解为 $(x_0, y_0)$ ，则当 $c$ 是 $\gcd(a,b)$ 的整数倍时 $ax + by = c$ 的一组解为 $(x_0\times c \div \gcd(a, b), y_0\times c \div \gcd (a, b))$ 关于扩欧的资料可以参考：Gavin’s Blog 代码12345678910111213141516#include &lt;cstdio&gt;#include &lt;algorithm&gt;void ExGCD (int a, int b, int &amp;ans, int &amp;x, int &amp;y) &#123; if (!b) ans = a, x = 1, y = 0; else ExGCD (b, a % b, ans, y, x), y -= x * (a / b);&#125;int main () &#123; int a, b, x, y, ans; scanf ("%d %d", &amp;a, &amp;b); ExGCD (a, -b, ans, x, y); x = x * 1 / ans; printf ("%d\n", (x % b + b) % b); return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「Unity」纯色渲染Sprite]]></title>
+    <url>%2F2016%2F11%2Funity-color-shader%2F</url>
+    <content type="text"><![CDATA[内容引入在三国志曹操传或其Mod有一个经典的镜头，就是角色暴击。当角色暴击时全身都会变成白色，如下图。在Unity中实现这种效果，只需要稍微改一下官方的Shader即可。 开始制作这是来自Unity官方的Shader，在这里完成了对Sprites的渲染。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374Shader &quot;Sprites/Default&quot;&#123; Properties &#123; [PerRendererData] _MainTex (&quot;Sprite Texture&quot;, 2D) = &quot;white&quot; &#123;&#125; _Color (&quot;Tint&quot;, Color) = (1,1,1,1) [MaterialToggle] PixelSnap (&quot;Pixel snap&quot;, Float) = 0 &#125; SubShader &#123; Tags &#123; &quot;Queue&quot;=&quot;Transparent&quot; &quot;IgnoreProjector&quot;=&quot;True&quot; &quot;RenderType&quot;=&quot;Transparent&quot; &quot;PreviewType&quot;=&quot;Plane&quot; &quot;CanUseSpriteAtlas&quot;=&quot;True&quot; &#125; Cull Off Lighting Off ZWrite Off Blend One OneMinusSrcAlpha Pass &#123; CGPROGRAM #pragma vertex vert #pragma fragment frag #pragma multi_compile _ PIXELSNAP_ON #include &quot;UnityCG.cginc&quot; struct appdata_t &#123; float4 vertex : POSITION; float4 color : COLOR; float2 texcoord : TEXCOORD0; &#125;; struct v2f &#123; float4 vertex : SV_POSITION; fixed4 color : COLOR; half2 texcoord : TEXCOORD0; &#125;; fixed4 _Color; v2f vert(appdata_t IN) &#123; v2f OUT; OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex); OUT.texcoord = IN.texcoord; OUT.color = IN.color * _Color; #ifdef PIXELSNAP_ON OUT.vertex = UnityPixelSnap (OUT.vertex); #endif return OUT; &#125; sampler2D _MainTex; fixed4 frag(v2f IN) : SV_Target &#123; fixed4 c = tex2D(_MainTex, IN.texcoord) * IN.color; c.rgb *= c.a; return c; &#125; ENDCG &#125; &#125;&#125; 观察 frag ，这使用了一个名为 tex2D 的函数，这个函数有如下原型：12345678910111213141516float4 tex2D(sampler2D samp, float2 s)float4 tex2D(sampler2D samp, float2 s, inttexelOff)float4 tex2D(sampler2D samp, float3 s)float4 tex2D(sampler2D samp, float3 s, inttexelOff)float4 tex2D(sampler2D samp, float2 s,float2 dx, float2 dy)float4 tex2D(sampler2D samp, float2 s,float2 dx, float2 dy, int texelOff)float4 tex2D(sampler2D samp, float3 s,float2 dx, float2 dy)float4 tex2D(sampler2D samp, float3 s,float2 dx, float2 dy, int texelOff)int4 tex2D(isampler2D samp, float2 s)int4 tex2D(isampler2D samp, float2 s, inttexelOff)int4 tex2D(isampler2D samp, float2 s,float2 dx, float2 dy)int4 tex2D(isampler2D samp, float2 s,float2 dx, float2 dy, int texelOff)unsigned int4 tex2D(usampler2D samp, float2s)unsigned int4 tex2D(usampler2D samp, float2s, int texelOff)unsigned int4 tex2D(usampler2D samp, float2s, float2 dx, float2 dy)unsigned int4 tex2D(usampler2D samp, float2s, float2 dx, float2 dy,int texelOff) 参数 说明 备注 samp Sampler to lookup 要进行采样的对象，即纹理 s Coordinates to perform the lookup 需进行查找的纹理坐标 dx Pre computed derivative along the x axis. 与计算沿着x轴方向的导数 dy Pre computed derivative along the y axis. 预计算沿着y轴方向的导数 texelOff Offset to be added to obtain the final texel. 添加给最终纹理的偏移量 tex2D 返回的也就是我们查找到的纹理了 而我们让这个纹理的 rgb 乘以其 alpha 也就得到了这个纹理应该怎么在屏幕上显示。 考虑将 rgb 换成纯色，比如白色 (1,1,1,1)，在乘以其 alpha 也就可以将纹理以纯色效果显示 同理，其他颜色也一样12345fixed4 frag(v2f IN) : SV_Target&#123; fixed4 c = tex2D(_MainTex, IN.texcoord) * IN.color; return IN.color * c.a;&#125;]]></content>
+      <categories>
+        <category>Unity</category>
+        <category>Shader</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「Unity」对象池的简单使用]]></title>
+    <url>%2F2016%2F10%2Fsample-object-pool%2F</url>
+    <content type="text"><![CDATA[简单的引例在射击游戏中角色通常会进行子弹的发射，一种较为直观的解决方案发射子弹时对子弹预设进行实例化，但实际上这样做将会占用大量资源且速度较慢。而对于诸如子弹创建这样大量而又对速度要求高的需求，通常使用对象池Object Pool来完成。 简单的思想对象池听上去比较的高大上，但其思想却非常简单。有一个由你自定义大小的游泳池（当然里面没有水），你可以提前将游戏物体生成，并放进这个池子中，用的时候在取出来。就是这么简单的思想。 子弹的创建就像是子弹创建一样，我们可以提前在游戏加载时创建好所需要的子弹（比如100发子弹）并放进准备好的一个对象池中，当按下开火键时将对象池中剩下的子弹随便拿出来一发，放到枪口，发射出去，当这枚子弹达到射程后，再把它放回对象池中。 简单的实现 在Inspector面板中的预设对象，比如子弹12public Transform[] bulletPoolObjects;public int[] bulletPoolSize; 很容易发现这是两个数组，bulletPoolObjects表示的是子弹预设，当然子弹可能有多种（子弹、炮弹、石头、愤怒的小鸟），所以他是一个数组，下面的bulletPoolSize表示的是这些子弹中相对应的每种子弹的对象池大小。 创建对象池 1private Dictionary&lt;Transform, Transform[]&gt; bulletPool; 这是一个映射，其key为bulletPoolObjects中的一种子弹，value表示这种子弹的对象池。 初始化对象池 123456789101112131415bulletPool = new Dictionary&lt;Transform, Transform[]&gt;();for (int i = 0; i &lt; bulletPoolObjects.Length; i++) &#123; Transform[] curItems = new Transform[bulletPoolSize[i]]; for (int j = 0; j &lt; bulletPoolSize[i]; j++) &#123; Transform trs = (Instantiate(bulletPoolObjects[i], Vector3.zero, Quaternion.identity) as GameObject).transform; trs.gameObject.SetActive(false); trs.parent = transform; curItems[j] = trs; &#125; bulletPool.Add(bulletPoolObjects[i], curItems);&#125; 从对象池中取出对象 12345678910111213141516171819public Transform Spawn(Transform obj, Vector3 pos, Quaternion rot, Transform parent) &#123; for (int i = 0; i &lt; bulletPool[obj].Length; i++) &#123; if (!bulletPool[obj][i].gameObject.activeSelf) &#123; Transform spawnItem = bulletPool[obj][i]; spawnItem.parent = parent; spawnItem.position = pos; spawnItem.rotation = rot; spawnItem.gameObject.SetActive(true); spawnItem.BroadcastMessage("OnSpawned", SendMessageOptions.DontRequireReceiver); return spawnItem; &#125; &#125; return null;&#125; 放回对象池放回对象池只需要将这个物体的active设为false就可以了。 最后…一次new一个新对象不如一次new很多个对象要快…]]></content>
+      <categories>
+        <category>Unity</category>
+        <category>Misc</category>
+      </categories>
+      <tags>
+        <tag>Object Pool</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「Unity」创建激光效果]]></title>
+    <url>%2F2016%2F10%2Funity-beam%2F</url>
+    <content type="text"><![CDATA[简序游戏中常看到一些激光的效果，当然，这很炫。不妨在开始前先想一想如何来绘制激光，如何制作激光击中的地方的破碎效果… 开始Angry Bots在低版本Unity3D中的范例工程 Angry Bots 中角色的红外线效果便是使用 Line Renderer 制作，激光又和红外线是差不多一类的物体，很自然的可以想到使用这个组件进行绘制。 Line RendererLine Renderer，也就是线渲染器，听名字就觉得它是用来绘制线的，但它绘制的不是单纯的线，你可以用它来绘制简单的直线甚至复杂的曲线。当然，Line Renderer 并不只是绘制一个像素的直线，它也可以绘制 有宽度 的线，可以理解为一个面。 UV动画这是和Shader有关的内容(反正我不会Shader)，但对于激光来说，其主要的原理就是改变Material的偏移Offset，这样自然就模拟出了动画效果。1m_LineRenderer.material.SetTextureOffset("_MainTex", new Vector2(Time.time * UVTime + initialBeamOffset, 0f)); 射线检测当碰撞到物体后我们希望这个激光柱的长度为到这个物体的距离，而Line Renderer的Position是用来给这条绘制的激光设置位置的，不妨在编辑器中改变其值观察效果，这样，当碰撞到了物体，便设置从发射点到碰撞点的距离为激光的长度。 1234567891011121314if (hitInfo.transform) &#123; // 计算激光长度 beamLength = Vector3.Distance(transform.position, hitInfo.point); m_LineRenderer.SetPosition(1, new Vector3(0f, 0f, beamLength)); // 给目标点添加力的效果 ApplyForce(0.5f); // 在击中点生成粒子特效 if (rayPar) &#123; rayPar.position = hitInfo.point - transform.forward * 0.36f; &#125;&#125; 如果没有击中物体，我们当然不是天真的绘制一条无限长的线，而是规定一个最远激光可以打到的距离，比如100。1234567// 未击中物体else &#123; beamLength = maxBeamLength; m_LineRenderer.SetPosition(1, new Vector3(0f, 0f, beamLength)); if (rayPar) rayPar.position = transform.position + transform.forward * beamLength;&#125; 这样激光效果就创建完成了，如果你绘制出来的线是一片海棠红的颜色，你需要设置一下线渲染器的材质。]]></content>
+      <categories>
+        <category>Unity</category>
+        <category>Shader</category>
+      </categories>
+      <tags>
+        <tag>Shader</tag>
+        <tag>Line Renderer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[多重背包与混合背包]]></title>
+    <url>%2F2016%2F10%2Fmultiple-pack%2F</url>
+    <content type="text"><![CDATA[多重背包内容描述背包体积为 $ V $ ，有 $ M $ 种物品，每种物品，第 $ i $ 件物品的体积为 $ v_i $，价值为 $ w_i $ ，有 $ m_i $ 件可用，从中选出若干件放入背包使得背包所具有的价值最大。 算法分析相对于01背包，01背包是有 $ M $ 种物品而每种只有一件，多重背包则是每种物品有若干件，如果将这若干件拆分为一件一件的，和01背包也就没有区别了。这样做的时间复杂度为 $ O(V\times\sum m_i) $ 简单优化这里使用二进制拆分的思想进行优化。对于第 $ i $ 种物品，有 $ m_i $ 种可用，我们可以把 $ m_i $ 拆成二进制数： $ 1,2,4,8,\dots $，这样在做01背包时，第一次考虑放一件时的最优解，第二次考虑放两件时，在放这两件时可能是单纯的只放这两件，也可能是原来已经放了一件（第一次放进去的）之后再放两件，也就是三件，这样就可以将复杂度降为 $ O(V\times\sum\log_2^{m_i}) $ 使用二进制可以表示出任何数，比如数字在计算机中的存储 混合背包题目描述背包体积为V ,给出N个物品，每个物品占用体积为Vi,价值为Wi,每个物品要么至多取1件，要么至多取mi件（mi &gt; 1） , 要么数量无限 ， 在所装物品总体积不超过V的前提下所装物品的价值的和的最大值是多少？ 题目分析先考虑01背包和完全背包，用滚动数组优化后的他们只相差一行，而在这一行中，01背包要倒着跑，因为它要保证每种物品只取一件，而完全背包是正着跑的，因为每件物品可以取无限次。这样判断一下这件物品如果是无限多的，那就正着跑完全背包，让每件物品可以取无限件。 而通过上面的分析多重背包可以看做01背包，所以01背包可以和多重背包一起，这样就能求出最后的结果了。 CodeVS混合背包 很弱的Grape的代码1234567891011121314151617181920212223242526272829303132333435363738#include &lt;cstdio&gt;#include &lt;algorithm&gt;#define maxv 200000 + 10int N, V, bag[maxv];int main () &#123; scanf ("%d %d", &amp;N, &amp;V); for (register int i = 1, v, w, m; i &lt;= N; i++) &#123; scanf ("%d %d %d", &amp;v, &amp;w, &amp;m); if (m == -1) for (register int j = v; j &lt;= V; j++) &#123; bag[j] = std::max (bag[j], bag[j - v] + w); &#125; &#125; else &#123; for (register int k = 1; k &lt;= m; m -= k, k &lt;&lt;= 1) &#123; int vi = v * k, wi = w * k; for (register int j = V; j &gt;= vi; j--) &#123; bag[j] = std::max (bag[j], bag[j - vi] + wi); &#125; &#125; if (m != 0) &#123; int vi = v * m, wi = w * m; for (register int j = V; j &gt;= vi; j--) &#123; bag[j] = std::max (bag[j], bag[j - vi] + wi); &#125; &#125; &#125; &#125; printf ("%d", bag[V]); return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>背包问题</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[稀疏表]]></title>
+    <url>%2F2016%2F09%2Frmq-note%2F</url>
+    <content type="text"><![CDATA[稀疏表用于求解区间最值问题，即 RMQ 问题，它的空间复杂度相对于线段树以及树状数组来说要大，空间复杂度为 $\Theta (N\log_2N) $ , 也不兹磁修改操作，但其查询的时间复杂度是 $\Theta (1) $ 的。适用于：无修改且询问次数较多的 RMQ 问题。]]></content>
+      <categories>
+        <category>OI</category>
+        <category>NOIP</category>
+      </categories>
+      <tags>
+        <tag>RMQ</tag>
+      </tags>
+  </entry>
+</search>

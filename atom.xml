@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Grapedge</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://blog.grapedge.top/"/>
+  <updated>2018-10-13T06:28:45.677Z</updated>
+  <id>http://blog.grapedge.top/</id>
+  
+  <author>
+    <name>Grapes</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KMP算法</title>
+    <link href="http://blog.grapedge.top/2017/03/kmp-note/"/>
+    <id>http://blog.grapedge.top/2017/03/kmp-note/</id>
+    <published>2017-03-17T04:10:30.000Z</published>
+    <updated>2018-10-13T06:28:45.677Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;KMP算法用于字符串匹配，算法复杂度为 $\Theta (N)$&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="字符串" scheme="http://blog.grapedge.top/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图的割边</title>
+    <link href="http://blog.grapedge.top/2017/03/cut-edge/"/>
+    <id>http://blog.grapedge.top/2017/03/cut-edge/</id>
+    <published>2017-03-04T01:31:25.000Z</published>
+    <updated>2018-07-01T01:25:16.925Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;对于连通图 &lt;code&gt;G&lt;/code&gt;，若删除其中的一条边 &lt;code&gt;e&lt;/code&gt;，原图不再连通，则 &lt;code&gt;e&lt;/code&gt; 是图 &lt;code&gt;G&lt;/code&gt; 的一条割边。一个图可能有多条割边。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="Tarjan" scheme="http://blog.grapedge.top/tags/Tarjan/"/>
+    
+      <category term="图论" scheme="http://blog.grapedge.top/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图的割点</title>
+    <link href="http://blog.grapedge.top/2017/03/cut-vertex/"/>
+    <id>http://blog.grapedge.top/2017/03/cut-vertex/</id>
+    <published>2017-03-03T04:00:30.000Z</published>
+    <updated>2018-07-01T01:11:00.070Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;定义：对于无向图 &lt;code&gt;G&lt;/code&gt; ，如果删除某个顶点 &lt;code&gt;u&lt;/code&gt; 之后，连通分量的数目增加，则称 &lt;code&gt;u&lt;/code&gt; 为图的割点。一个图可能有多个割点。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="Tarjan" scheme="http://blog.grapedge.top/tags/Tarjan/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tarjan 算法</title>
+    <link href="http://blog.grapedge.top/2017/03/tarjan-note/"/>
+    <id>http://blog.grapedge.top/2017/03/tarjan-note/</id>
+    <published>2017-03-02T04:10:30.000Z</published>
+    <updated>2018-07-01T01:06:32.391Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Tarjan&lt;/code&gt; 用于求解 &lt;code&gt;有向图&lt;/code&gt; 的强连通分量。在有向图 &lt;code&gt;G&lt;/code&gt; 中如果两个顶点 &lt;code&gt;u&lt;/code&gt;、 &lt;code&gt;v&lt;/code&gt; 之间相互可达，则称这两个点是强连通的。若 &lt;code&gt;G&lt;/code&gt; 中任意两点是强连通的，则称图 &lt;code&gt;G&lt;/code&gt; 是 &lt;code&gt;强连通图&lt;/code&gt;。有向非强连通图的&lt;strong&gt;极大强连通子图&lt;/strong&gt;称为强连通分量。极大的意义是，对于图 &lt;code&gt;G&lt;/code&gt; 的一个极大强连通子图 &lt;code&gt;K&lt;/code&gt;，当我们将原图 &lt;code&gt;G&lt;/code&gt; 中任意一个非 &lt;code&gt;K&lt;/code&gt; 结点加入 &lt;code&gt;K&lt;/code&gt; 后，&lt;code&gt;K&lt;/code&gt; 不再是一个强连通图。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="Tarjan" scheme="http://blog.grapedge.top/tags/Tarjan/"/>
+    
+      <category term="图论" scheme="http://blog.grapedge.top/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>树链剖分</title>
+    <link href="http://blog.grapedge.top/2017/01/chain-split/"/>
+    <id>http://blog.grapedge.top/2017/01/chain-split/</id>
+    <published>2017-01-18T13:24:58.000Z</published>
+    <updated>2018-07-01T01:43:03.068Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;树链剖分常用于解决静态树上路径信息维护的问题，例如修改树上某条路径中所有结点的值，或是查询某路径中所有结点的和。假如说该树退化为一条链，这便成了区间修改、区间查询问题。如果我们能将树上的点按照某种方式组织起来，剖分成若干条链，则每条链相当于一个区间，此时便可用一些其他数据结构进行维护。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="树链剖分" scheme="http://blog.grapedge.top/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「UVa679」Dropping Balls</title>
+    <link href="http://blog.grapedge.top/2016/11/dropping-balls/"/>
+    <id>http://blog.grapedge.top/2016/11/dropping-balls/</id>
+    <published>2016-11-13T07:34:53.000Z</published>
+    <updated>2018-10-13T08:15:29.199Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;有一棵具有 $2^D-1$ 个节点的二叉树， $I$ 个小球，每个节点是一个开关，默认为关，小球每到一个点上会改变该点的状态为相反的状态，若此时开关为开则向左移动，若为关则向右移动。问第 $I$ 个小球最终会下落到几号节点。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="二叉树" scheme="http://blog.grapedge.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>左偏树</title>
+    <link href="http://blog.grapedge.top/2016/11/left-tree/"/>
+    <id>http://blog.grapedge.top/2016/11/left-tree/</id>
+    <published>2016-11-12T13:24:58.000Z</published>
+    <updated>2018-07-01T01:41:14.679Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;左偏树是一种可并堆，这使得他满足堆的性质，也能在 $\Theta (\log_2N)$ 的时间内合并两个堆。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="二叉树" scheme="http://blog.grapedge.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+      <category term="可并堆" scheme="http://blog.grapedge.top/tags/%E5%8F%AF%E5%B9%B6%E5%A0%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「UVa442」Matrix Chain Multiplication</title>
+    <link href="http://blog.grapedge.top/2016/11/matrix-chain-multiplication/"/>
+    <id>http://blog.grapedge.top/2016/11/matrix-chain-multiplication/</id>
+    <published>2016-11-12T13:21:42.000Z</published>
+    <updated>2018-07-01T01:29:49.983Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给定 $n (1 \leq n \leq 26)$ 个矩阵以及一些矩阵链乘表达式，求每一个表达式的运算次数。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
+    
+      <category term="栈" scheme="http://blog.grapedge.top/tags/%E6%A0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>std::bitset 笔记</title>
+    <link href="http://blog.grapedge.top/2016/11/bitset-note/"/>
+    <id>http://blog.grapedge.top/2016/11/bitset-note/</id>
+    <published>2016-11-12T02:50:30.000Z</published>
+    <updated>2018-07-01T01:02:14.510Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们可以使用 &lt;code&gt;bitset&lt;/code&gt; 来进行一些位运算，它使得位运算更加简单。特别是 &lt;code&gt;bitset&lt;/code&gt; 可以处理超过 &lt;code&gt;unisigned long long&lt;/code&gt; 的位大小的位集合。用 &lt;code&gt;bitset&lt;/code&gt; 来代替 &lt;code&gt;bool&lt;/code&gt; 数组将减少很大的空间。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="STL" scheme="http://blog.grapedge.top/tags/STL/"/>
+    
+      <category term="bitset" scheme="http://blog.grapedge.top/tags/bitset/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>差分思想及应用</title>
+    <link href="http://blog.grapedge.top/2016/11/difference/"/>
+    <id>http://blog.grapedge.top/2016/11/difference/</id>
+    <published>2016-11-10T06:20:48.000Z</published>
+    <updated>2016-11-10T06:38:56.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一维差分&quot;&gt;&lt;a href=&quot;#一维差分&quot; class=&quot;headerlink&quot; title=&quot;一维差分&quot;&gt;&lt;/a&gt;一维差分&lt;/h2&gt;&lt;p&gt;有一个序列，$m$ 次操作，每次操作将区间 $[L,R]$ 中的数字加 $x$，输出这个序列。&lt;/p&gt;
+&lt;h3 id=&quot;引入&quot;&gt;&lt;a href=&quot;#引入&quot; class=&quot;headerlink&quot; title=&quot;引入&quot;&gt;&lt;/a&gt;引入&lt;/h3&gt;&lt;p&gt;如果数据范围很小，可以直接进行模拟，但如果数据范围很大的话，可以考虑&lt;code&gt;线段树&lt;/code&gt;。一种更简单的做法：使用&lt;code&gt;差分&lt;/code&gt;的思想。在开始前，要接触&lt;code&gt;前缀和&lt;/code&gt;的概念。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="差分" scheme="http://blog.grapedge.top/tags/%E5%B7%AE%E5%88%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「UVa10820」Send a Table</title>
+    <link href="http://blog.grapedge.top/2016/11/send-a-table/"/>
+    <id>http://blog.grapedge.top/2016/11/send-a-table/</id>
+    <published>2016-11-10T01:31:25.000Z</published>
+    <updated>2018-07-01T01:30:33.791Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;已知通过 $f(x,y)$ 可以计算 $f(x \times k, y \times k), k\in N^*$ ，求最少需要多少个 $f(x,y)$ 使得任意 $x, y \in [1,n]$ 均能够被计算出来。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+      <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>欧拉函数</title>
+    <link href="http://blog.grapedge.top/2016/11/euler-note/"/>
+    <id>http://blog.grapedge.top/2016/11/euler-note/</id>
+    <published>2016-11-09T09:10:00.000Z</published>
+    <updated>2018-07-01T01:08:50.647Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;欧拉函数&quot;&gt;&lt;a href=&quot;#欧拉函数&quot; class=&quot;headerlink&quot; title=&quot;欧拉函数&quot;&gt;&lt;/a&gt;欧拉函数&lt;/h2&gt;&lt;p&gt;欧拉函数定义为&lt;strong&gt;小于等于n的数中与n互质的数的数目&lt;/strong&gt;。设 $n$ 的唯一分解式：$n = p_1^{a_1}p_2^{a_2}p_3^{a_3}\dots p_k^{a_k}$。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+      <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「UVa10375」Choose and Divide</title>
+    <link href="http://blog.grapedge.top/2016/11/uva10375/"/>
+    <id>http://blog.grapedge.top/2016/11/uva10375/</id>
+    <published>2016-11-09T07:40:00.000Z</published>
+    <updated>2018-07-01T01:28:27.855Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;已知 $C(m, n) = m! \div (n! \times (m-n)!)$，求$C(p,q)\div C(r,s)$，其中 $p,q,r,s \leq 10000$&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「NOIP2012」同余方程</title>
+    <link href="http://blog.grapedge.top/2016/11/noip-2012-d2t1/"/>
+    <id>http://blog.grapedge.top/2016/11/noip-2012-d2t1/</id>
+    <published>2016-11-09T02:10:00.000Z</published>
+    <updated>2018-07-01T01:12:10.382Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简序&quot;&gt;&lt;a href=&quot;#简序&quot; class=&quot;headerlink&quot; title=&quot;简序&quot;&gt;&lt;/a&gt;简序&lt;/h2&gt;&lt;p&gt;对于$a \equiv b \pmod n$，它表示 $a$ 和 $b$ 在&lt;strong&gt;模意义&lt;/strong&gt;下除以 $n$ 的余数相等。模意义也就是进行取模运算，而非取余运算，如$-1  \equiv 2 \pmod 3$。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;同余：&lt;/strong&gt;如果两个整数 $a$ 和 $b$ 满足 $(a-b) $ 能够被整数 $n$ 整除，即 $(a-b)/n$ 得到一个整数，那么就称整数 $a$ 与 $b$ 对模 $n$ 同余&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「Unity」纯色渲染Sprite</title>
+    <link href="http://blog.grapedge.top/2016/11/unity-color-shader/"/>
+    <id>http://blog.grapedge.top/2016/11/unity-color-shader/</id>
+    <published>2016-11-08T13:50:00.000Z</published>
+    <updated>2018-07-01T01:33:22.678Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;内容引入&quot;&gt;&lt;a href=&quot;#内容引入&quot; class=&quot;headerlink&quot; title=&quot;内容引入&quot;&gt;&lt;/a&gt;内容引入&lt;/h2&gt;&lt;p&gt;在三国志曹操传或其Mod有一个经典的镜头，就是角色暴击。当角色暴击时全身都会变成白色，如下图。&lt;br&gt;&lt;img src=&quot;http://oed2kdm1n.bkt.clouddn.com/public/16-11-8/63867260.jpg&quot; alt=&quot;bs&quot;&gt;&lt;br&gt;在Unity中实现这种效果，只需要稍微改一下官方的Shader即可。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
+    
+      <category term="Shader" scheme="http://blog.grapedge.top/categories/Unity/Shader/"/>
+    
+    
+      <category term="Shader" scheme="http://blog.grapedge.top/tags/Shader/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「Unity」对象池的简单使用</title>
+    <link href="http://blog.grapedge.top/2016/10/sample-object-pool/"/>
+    <id>http://blog.grapedge.top/2016/10/sample-object-pool/</id>
+    <published>2016-10-31T13:24:58.000Z</published>
+    <updated>2018-07-01T01:20:36.646Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简单的引例&quot;&gt;&lt;a href=&quot;#简单的引例&quot; class=&quot;headerlink&quot; title=&quot;简单的引例&quot;&gt;&lt;/a&gt;简单的引例&lt;/h2&gt;&lt;p&gt;在射击游戏中角色通常会进行子弹的发射，一种较为直观的解决方案发射子弹时对子弹预设进行实例化，但实际上这样做将会占用大量资源且速度较慢。而对于诸如子弹创建这样大量而又对速度要求高的需求，通常使用对象池&lt;code&gt;Object Pool&lt;/code&gt;来完成。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
+    
+      <category term="Misc" scheme="http://blog.grapedge.top/categories/Unity/Misc/"/>
+    
+    
+      <category term="Object Pool" scheme="http://blog.grapedge.top/tags/Object-Pool/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「Unity」创建激光效果</title>
+    <link href="http://blog.grapedge.top/2016/10/unity-beam/"/>
+    <id>http://blog.grapedge.top/2016/10/unity-beam/</id>
+    <published>2016-10-30T13:40:00.000Z</published>
+    <updated>2018-07-01T01:05:53.027Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简序&quot;&gt;&lt;a href=&quot;#简序&quot; class=&quot;headerlink&quot; title=&quot;简序&quot;&gt;&lt;/a&gt;简序&lt;/h2&gt;&lt;p&gt;游戏中常看到一些激光的效果，当然，这很炫。不妨在开始前先想一想如何来绘制激光，如何制作激光击中的地方的破碎效果…&lt;/p&gt;
+&lt;h2 id=&quot;开始&quot;&gt;&lt;a href=&quot;#开始&quot; class=&quot;headerlink&quot; title=&quot;开始&quot;&gt;&lt;/a&gt;开始&lt;/h2&gt;&lt;h3 id=&quot;Angry-Bots&quot;&gt;&lt;a href=&quot;#Angry-Bots&quot; class=&quot;headerlink&quot; title=&quot;Angry Bots&quot;&gt;&lt;/a&gt;Angry Bots&lt;/h3&gt;&lt;p&gt;在低版本Unity3D中的范例工程 &lt;code&gt;Angry Bots&lt;/code&gt; 中角色的红外线效果便是使用 &lt;code&gt;Line Renderer&lt;/code&gt; 制作，激光又和红外线是差不多一类的物体，很自然的可以想到使用这个组件进行绘制。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
+    
+      <category term="Shader" scheme="http://blog.grapedge.top/categories/Unity/Shader/"/>
+    
+    
+      <category term="Shader" scheme="http://blog.grapedge.top/tags/Shader/"/>
+    
+      <category term="Line Renderer" scheme="http://blog.grapedge.top/tags/Line-Renderer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>多重背包与混合背包</title>
+    <link href="http://blog.grapedge.top/2016/10/multiple-pack/"/>
+    <id>http://blog.grapedge.top/2016/10/multiple-pack/</id>
+    <published>2016-10-22T09:00:00.000Z</published>
+    <updated>2018-07-01T01:07:27.783Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;多重背包&quot;&gt;&lt;a href=&quot;#多重背包&quot; class=&quot;headerlink&quot; title=&quot;多重背包&quot;&gt;&lt;/a&gt;多重背包&lt;/h2&gt;&lt;h3 id=&quot;内容描述&quot;&gt;&lt;a href=&quot;#内容描述&quot; class=&quot;headerlink&quot; title=&quot;内容描述&quot;&gt;&lt;/a&gt;内容描述&lt;/h3&gt;&lt;p&gt;背包体积为 $ V $ ，有 $ M $ 种物品，每种物品，第  $ i $ 件物品的体积为 $ v_i $，价值为 $ w_i $ ，有 $ m_i $ 件可用，从中选出若干件放入背包使得背包所具有的价值最大。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="背包问题" scheme="http://blog.grapedge.top/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="动态规划" scheme="http://blog.grapedge.top/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>稀疏表</title>
+    <link href="http://blog.grapedge.top/2016/09/rmq-note/"/>
+    <id>http://blog.grapedge.top/2016/09/rmq-note/</id>
+    <published>2016-09-17T13:24:58.000Z</published>
+    <updated>2018-07-01T01:41:29.430Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;稀疏表用于求解区间最值问题，即 &lt;code&gt;RMQ&lt;/code&gt; 问题，它的空间复杂度相对于线段树以及树状数组来说要大，空间复杂度为 $\Theta (N\log_2N) $ , 也不兹磁修改操作，但其查询的时间复杂度是 $\Theta (1) $ 的。适用于：无修改且询问
+      
+    
+    </summary>
+    
+      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
+    
+      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
+    
+    
+      <category term="RMQ" scheme="http://blog.grapedge.top/tags/RMQ/"/>
+    
+  </entry>
+  
+</feed>
