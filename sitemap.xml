@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.grapedge.top/about/index.html</loc>
+    
+    <lastmod>2018-10-19T17:06:25.366Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.grapedge.top/tags/index.html</loc>
+    
+    <lastmod>2018-10-19T17:03:41.066Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.grapedge.top/categories/index.html</loc>
+    
+    <lastmod>2018-10-19T17:03:27.964Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.grapedge.top/2018/10/android-qqchat-login/</loc>
     
     <lastmod>2018-10-19T16:47:43.256Z</lastmod>
@@ -23,30 +44,9 @@
   </url>
   
   <url>
-    <loc>http://blog.grapedge.top/about/index.html</loc>
-    
-    <lastmod>2018-10-13T10:50:58.827Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.grapedge.top/2016/11/dropping-balls/</loc>
     
     <lastmod>2018-10-13T08:15:29.199Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.grapedge.top/categories/index.html</loc>
-    
-    <lastmod>2018-10-13T07:12:11.018Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.grapedge.top/tags/index.html</loc>
-    
-    <lastmod>2018-10-13T07:11:07.737Z</lastmod>
     
   </url>
   
