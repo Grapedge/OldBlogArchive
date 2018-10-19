@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2018-10-17T12:52:44.469Z</updated>
+  <updated>2018-10-19T16:47:43.256Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android 模仿 QQ 登录界面</title>
+    <link href="http://blog.grapedge.top/2018/10/android-qqchat-login/"/>
+    <id>http://blog.grapedge.top/2018/10/android-qqchat-login/</id>
+    <published>2018-10-19T12:50:00.000Z</published>
+    <updated>2018-10-19T16:47:43.256Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;学线移动端布置的任务为模仿制作一个 &lt;code&gt;QQ&lt;/code&gt; 登录界面，所以这篇博客的定位为 &lt;code&gt;Activity&lt;/code&gt; 实战。分析打开 &lt;code&gt;QQ&lt;/code&gt; 的过程，大致分为 &lt;code&gt;Splash&lt;/code&gt; 页面和输入账号密码以及验证登录。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://blog.grapedge.top/categories/Android/"/>
+    
+      <category term="Activity" scheme="http://blog.grapedge.top/categories/Android/Activity/"/>
+    
+    
+      <category term="Android" scheme="http://blog.grapedge.top/tags/Android/"/>
+    
+      <category term="Activity" scheme="http://blog.grapedge.top/tags/Activity/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 广播机制（二）</title>
@@ -317,9 +341,9 @@
     
       <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
     
-      <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
-    
       <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
+    
+      <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
@@ -462,30 +486,6 @@
       <category term="Shader" scheme="http://blog.grapedge.top/tags/Shader/"/>
     
       <category term="Line Renderer" scheme="http://blog.grapedge.top/tags/Line-Renderer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>多重背包与混合背包</title>
-    <link href="http://blog.grapedge.top/2016/10/multiple-pack/"/>
-    <id>http://blog.grapedge.top/2016/10/multiple-pack/</id>
-    <published>2016-10-22T09:00:00.000Z</published>
-    <updated>2018-07-01T01:07:27.783Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;多重背包&quot;&gt;&lt;a href=&quot;#多重背包&quot; class=&quot;headerlink&quot; title=&quot;多重背包&quot;&gt;&lt;/a&gt;多重背包&lt;/h2&gt;&lt;h3 id=&quot;内容描述&quot;&gt;&lt;a href=&quot;#内容描述&quot; class=&quot;headerlink&quot; title=&quot;内容描述&quot;&gt;&lt;/a&gt;内容描述&lt;/h3&gt;&lt;p&gt;背包体积为 $ V $ ，有 $ M $ 种物品，每种物品，第  $ i $ 件物品的体积为 $ v_i $，价值为 $ w_i $ ，有 $ m_i $ 件可用，从中选出若干件放入背包使得背包所具有的价值最大。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="背包问题" scheme="http://blog.grapedge.top/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
-    
-      <category term="动态规划" scheme="http://blog.grapedge.top/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
