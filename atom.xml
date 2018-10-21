@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2018-10-19T16:47:43.256Z</updated>
+  <updated>2018-10-21T07:27:21.279Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android 键盘遮挡控件的解决方案</title>
+    <link href="http://blog.grapedge.top/2018/10/android-imb/"/>
+    <id>http://blog.grapedge.top/2018/10/android-imb/</id>
+    <published>2018-10-21T03:10:00.000Z</published>
+    <updated>2018-10-21T07:27:21.279Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;在上一篇博客实现了一个简单的登录的界面，但由于我们的输入框是放在中间的位置，而登录按钮处于输入框的下方，所以当我们进行输入时，弹出的软键盘会遮挡住登录的按钮。我们要实现的就是弹出输入法后，界面向上滚动，使得按钮可以被显示出来。&lt;br&gt;&lt;img src=&quot;https://s1.ax1x.com/2018/10/21/iBdc0e.png&quot; alt=&quot;输入法遮挡了登录按钮&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://blog.grapedge.top/categories/Android/"/>
+    
+      <category term="Activity" scheme="http://blog.grapedge.top/categories/Android/Activity/"/>
+    
+    
+      <category term="Android" scheme="http://blog.grapedge.top/tags/Android/"/>
+    
+      <category term="Activity" scheme="http://blog.grapedge.top/tags/Activity/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 模仿 QQ 登录界面</title>
@@ -268,9 +292,9 @@
       <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
     
     
-      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
-    
       <category term="栈" scheme="http://blog.grapedge.top/tags/%E6%A0%88/"/>
+    
+      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
     
   </entry>
   
@@ -461,31 +485,6 @@
     
     
       <category term="Object Pool" scheme="http://blog.grapedge.top/tags/Object-Pool/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「Unity」创建激光效果</title>
-    <link href="http://blog.grapedge.top/2016/10/unity-beam/"/>
-    <id>http://blog.grapedge.top/2016/10/unity-beam/</id>
-    <published>2016-10-30T13:40:00.000Z</published>
-    <updated>2018-07-01T01:05:53.027Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简序&quot;&gt;&lt;a href=&quot;#简序&quot; class=&quot;headerlink&quot; title=&quot;简序&quot;&gt;&lt;/a&gt;简序&lt;/h2&gt;&lt;p&gt;游戏中常看到一些激光的效果，当然，这很炫。不妨在开始前先想一想如何来绘制激光，如何制作激光击中的地方的破碎效果…&lt;/p&gt;
-&lt;h2 id=&quot;开始&quot;&gt;&lt;a href=&quot;#开始&quot; class=&quot;headerlink&quot; title=&quot;开始&quot;&gt;&lt;/a&gt;开始&lt;/h2&gt;&lt;h3 id=&quot;Angry-Bots&quot;&gt;&lt;a href=&quot;#Angry-Bots&quot; class=&quot;headerlink&quot; title=&quot;Angry Bots&quot;&gt;&lt;/a&gt;Angry Bots&lt;/h3&gt;&lt;p&gt;在低版本Unity3D中的范例工程 &lt;code&gt;Angry Bots&lt;/code&gt; 中角色的红外线效果便是使用 &lt;code&gt;Line Renderer&lt;/code&gt; 制作，激光又和红外线是差不多一类的物体，很自然的可以想到使用这个组件进行绘制。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
-    
-      <category term="Shader" scheme="http://blog.grapedge.top/categories/Unity/Shader/"/>
-    
-    
-      <category term="Shader" scheme="http://blog.grapedge.top/tags/Shader/"/>
-    
-      <category term="Line Renderer" scheme="http://blog.grapedge.top/tags/Line-Renderer/"/>
     
   </entry>
   
