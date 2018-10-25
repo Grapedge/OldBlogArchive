@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2018-10-21T07:27:21.279Z</updated>
+  <updated>2018-10-25T06:37:54.600Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android 学线 QQ 项目（一）</title>
+    <link href="http://blog.grapedge.top/2018/10/android-qqchat1/"/>
+    <id>http://blog.grapedge.top/2018/10/android-qqchat1/</id>
+    <published>2018-10-25T12:50:00.000Z</published>
+    <updated>2018-10-25T06:37:54.600Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;本篇博客基于学生在线移动端第三次作业编写，所以这篇博客内容较杂，通过这个表格你可以明确一下方向：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;功能&lt;/th&gt;
+&lt;th&gt;实现&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;登录、注册、好友&lt;/td&gt;
+&lt;td&gt;OkHttp3 + GSON&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;自动登录&lt;/td&gt;
+&lt;td&gt;可持久化数据存储&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;显示好友列表&lt;/td&gt;
+&lt;td&gt;RecyclerView&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;底部导航栏&lt;/td&gt;
+&lt;td&gt;Fragment 碎片布局&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;在（一）中，我们将实现登录、注册、自动登录功能。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://blog.grapedge.top/categories/Android/"/>
+    
+      <category term="Activity" scheme="http://blog.grapedge.top/categories/Android/Activity/"/>
+    
+    
+      <category term="Android" scheme="http://blog.grapedge.top/tags/Android/"/>
+    
+      <category term="Activity" scheme="http://blog.grapedge.top/tags/Activity/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 键盘遮挡控件的解决方案</title>
@@ -463,28 +514,6 @@
     
     
       <category term="Shader" scheme="http://blog.grapedge.top/tags/Shader/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「Unity」对象池的简单使用</title>
-    <link href="http://blog.grapedge.top/2016/10/sample-object-pool/"/>
-    <id>http://blog.grapedge.top/2016/10/sample-object-pool/</id>
-    <published>2016-10-31T13:24:58.000Z</published>
-    <updated>2018-07-01T01:20:36.646Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简单的引例&quot;&gt;&lt;a href=&quot;#简单的引例&quot; class=&quot;headerlink&quot; title=&quot;简单的引例&quot;&gt;&lt;/a&gt;简单的引例&lt;/h2&gt;&lt;p&gt;在射击游戏中角色通常会进行子弹的发射，一种较为直观的解决方案发射子弹时对子弹预设进行实例化，但实际上这样做将会占用大量资源且速度较慢。而对于诸如子弹创建这样大量而又对速度要求高的需求，通常使用对象池&lt;code&gt;Object Pool&lt;/code&gt;来完成。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
-    
-      <category term="Misc" scheme="http://blog.grapedge.top/categories/Unity/Misc/"/>
-    
-    
-      <category term="Object Pool" scheme="http://blog.grapedge.top/tags/Object-Pool/"/>
     
   </entry>
   
