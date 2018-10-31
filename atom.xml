@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2018-10-27T08:47:57.229Z</updated>
+  <updated>2018-10-31T01:49:52.692Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「Unity」开发2048小游戏</title>
+    <link href="http://blog.grapedge.top/2018/10/unity-2048/"/>
+    <id>http://blog.grapedge.top/2018/10/unity-2048/</id>
+    <published>2018-10-31T12:50:00.000Z</published>
+    <updated>2018-10-31T01:49:52.692Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;code&gt;2048&lt;/code&gt; 作为一款出色的休闲游戏，基本没有人没听过他的名字。然而我在手机自带的应用商店中找不到一款纯净的 &lt;code&gt;2048&lt;/code&gt; ，于是打算使用 &lt;code&gt;Unity&lt;/code&gt; 做一款自己的 &lt;code&gt;2048&lt;/code&gt;。&lt;br&gt;完成的效果看起来像是这个样子：&lt;br&gt;&lt;img src=&quot;https://s1.ax1x.com/2018/10/31/iRUO1g.gif&quot; alt=&quot;pre.gif&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
+    
+      <category term="实战" scheme="http://blog.grapedge.top/categories/Unity/%E5%AE%9E%E6%88%98/"/>
+    
+    
+      <category term="Unity" scheme="http://blog.grapedge.top/tags/Unity/"/>
+    
+      <category term="Sprite" scheme="http://blog.grapedge.top/tags/Sprite/"/>
+    
+      <category term="实战" scheme="http://blog.grapedge.top/tags/%E5%AE%9E%E6%88%98/"/>
+    
+  </entry>
   
   <entry>
     <title>「Android」学生在线 QQ 项目（二）</title>
@@ -375,9 +401,9 @@
       <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
     
     
-      <category term="栈" scheme="http://blog.grapedge.top/tags/%E6%A0%88/"/>
-    
       <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
+    
+      <category term="栈" scheme="http://blog.grapedge.top/tags/%E6%A0%88/"/>
     
   </entry>
   
@@ -499,31 +525,6 @@
       <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
     
       <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「NOIP2012」同余方程</title>
-    <link href="http://blog.grapedge.top/2016/11/noip-2012-d2t1/"/>
-    <id>http://blog.grapedge.top/2016/11/noip-2012-d2t1/</id>
-    <published>2016-11-09T02:10:00.000Z</published>
-    <updated>2018-07-01T01:12:10.382Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简序&quot;&gt;&lt;a href=&quot;#简序&quot; class=&quot;headerlink&quot; title=&quot;简序&quot;&gt;&lt;/a&gt;简序&lt;/h2&gt;&lt;p&gt;对于$a \equiv b \pmod n$，它表示 $a$ 和 $b$ 在&lt;strong&gt;模意义&lt;/strong&gt;下除以 $n$ 的余数相等。模意义也就是进行取模运算，而非取余运算，如$-1  \equiv 2 \pmod 3$。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;同余：&lt;/strong&gt;如果两个整数 $a$ 和 $b$ 满足 $(a-b) $ 能够被整数 $n$ 整除，即 $(a-b)/n$ 得到一个整数，那么就称整数 $a$ 与 $b$ 对模 $n$ 同余&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
     
   </entry>
   
