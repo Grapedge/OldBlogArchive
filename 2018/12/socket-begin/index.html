@@ -1,0 +1,335 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2"><link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"6.4.2",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="简介这周的微软学生俱乐部的作业是完成一个简易的聊天系统，本篇博客将以此为主题进行探讨。Socket ，译作套接字（台湾翻译为網路插座），就可以用作网络上两个程序间的数据交换。"><meta name="keywords" content="Kotlin,Socket,网络"><meta property="og:type" content="article"><meta property="og:title" content="「Kotlin」Socket入门"><meta property="og:url" content="http://blog.grapedge.top/2018/12/socket-begin/index.html"><meta property="og:site_name" content="Grapedge"><meta property="og:description" content="简介这周的微软学生俱乐部的作业是完成一个简易的聊天系统，本篇博客将以此为主题进行探讨。Socket ，译作套接字（台湾翻译为網路插座），就可以用作网络上两个程序间的数据交换。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s1.ax1x.com/2018/12/05/Flr7p6.png"><meta property="og:image" content="https://camo.githubusercontent.com/75bfb5e12b0dd790eb9ad1a5569be7d5a9d0c6f3/68747470733a2f2f73312e617831782e636f6d2f323031382f31322f30352f466c74534d522e706e67"><meta property="og:updated_time" content="2018-12-05T10:17:03.421Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="「Kotlin」Socket入门"><meta name="twitter:description" content="简介这周的微软学生俱乐部的作业是完成一个简易的聊天系统，本篇博客将以此为主题进行探讨。Socket ，译作套接字（台湾翻译为網路插座），就可以用作网络上两个程序间的数据交换。"><meta name="twitter:image" content="https://s1.ax1x.com/2018/12/05/Flr7p6.png"><link rel="alternate" href="/atom.xml" title="Grapedge" type="application/atom+xml"><link rel="canonical" href="http://blog.grapedge.top/2018/12/socket-begin/"><script type="text/javascript" id="page.configurations">CONFIG.page={sidebar:""}</script><title>「Kotlin」Socket入门 | Grapedge</title><noscript><style type="text/css">.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Grapedge</span><span class="logo-line-after"><i></i></span></a></div></div><div class="site-nav-toggle"> <button aria-label="切换导航栏"><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header> <a href="https://github.com/grapedge" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#77b3ff96;color:#ffffffab;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://blog.grapedge.top/2018/12/socket-begin/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Grapes"><meta itemprop="description" content=""><meta itemprop="image" content="/images/avatar.png"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Grapedge"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">「Kotlin」Socket入门</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2018-12-05 16:50:00" itemprop="dateCreated datePublished" datetime="2018-12-05T16:50:00+08:00">2018-12-05</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kotlin/" itemprop="url" rel="index"><span itemprop="name">Kotlin</span></a></span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kotlin/Socket/" itemprop="url" rel="index"><span itemprop="name">Socket</span></a></span></span> <span class="post-comments-count"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-comment-o"></i></span><a href="/2018/12/socket-begin/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/socket-begin/" itemprop="commentCount"></span></a></span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i> 阅读次数：<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body" itemprop="articleBody"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>这周的微软学生俱乐部的作业是完成一个简易的聊天系统，本篇博客将以此为主题进行探讨。<code>Socket</code> ，译作套接字（台湾翻译为網路插座），就可以用作网络上两个程序间的数据交换。<br><a id="more"></a></p><h2 id="Http还是Socket？"><a href="#Http还是Socket？" class="headerlink" title="Http还是Socket？"></a>Http还是Socket？</h2><p>说起实现聊天功能，很多人可能会有一个疑问，就是为什么不使用轮询来完成。这其实要先了解网络七层，<code>Http</code> 属于应用层，而 <code>Socket</code> 属于传输层，前者主要考虑的是如何封装数据，后者主要考虑的是数据的传输。<br>如果要完成轮询功能，无非就是写一个死循环，这在客户端上还好，但在服务器端就比较消耗资源了，就算使用的是长轮询。这还有一个缺点，就是获取数据并不是实时的。当然，这种方式的优点就是容易实现。<br>而使用 <code>Socket</code> 就可以使用较少的资源完成相应的功能，因为其是在数据传输层上建立长连接（注意和长轮询的区别），相应的其可以实时的获取数据。这种方式的缺点就是服务端可能比较难实现，代码量要明显高于轮询的方式。<br><strong>具体使用哪种方式还是要根据实际情况来决定，上面只是讨论了聊天的情况，例如你通信次数很少，用 Http 就是要明显优于使用 <code>Socket</code> 的</strong></p><h2 id="什么是Socket"><a href="#什么是Socket" class="headerlink" title="什么是Socket"></a>什么是Socket</h2><p>传输层有 <code>TCP/UDP</code> 协议，而 <code>Socket</code> 的本质就是对他们进行封装。<code>UDP</code> 协议相对于 <code>TCP</code> 并不可靠，其一般用于局域网传输或一些要求传输效率高的地方，例如游戏中角色位置的更新，其对应的封装为 <code>DatagramSocket</code>。本文将主要讲解应用更广泛的 <code>TCP</code> 的封装 <code>Socket</code>（<code>TCP</code> 可靠的同时意味着其更消耗资源，时间，有些笑话就是讲 <code>TCP</code> 的三次握手）。</p><h2 id="客户端使用-Socket"><a href="#客户端使用-Socket" class="headerlink" title="客户端使用 Socket"></a>客户端使用 Socket</h2><h3 id="创建-Socket-对象"><a href="#创建-Socket-对象" class="headerlink" title="创建 Socket 对象"></a>创建 Socket 对象</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> socket = Socket(<span class="string">"127.0.0.1"</span>, <span class="number">2333</span>)</span><br></pre></td></tr></table></figure><h3 id="获取-Socket-输入输出流"><a href="#获取-Socket-输入输出流" class="headerlink" title="获取 Socket 输入输出流"></a>获取 Socket 输入输出流</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = BufferedReader(InputStreamReader(socket.getInputStream()))</span><br><span class="line"><span class="keyword">var</span> writer = PrintWriter(socket.getOutputStream())</span><br></pre></td></tr></table></figure><p>注意：不一定要用 <code>BufferedReader</code> 和 <code>PrintWriter</code>，<code>Socket</code> 中应该使用什么和 <code>IO</code> 是很相似的。</p><h3 id="向服务器读取或写入数据"><a href="#向服务器读取或写入数据" class="headerlink" title="向服务器读取或写入数据"></a>向服务器读取或写入数据</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reader.readLine()   <span class="comment">// 从服务器读取一行数据</span></span><br><span class="line">writer.println(<span class="string">"Hello World!"</span>)  <span class="comment">// 向服务器写入一行数据</span></span><br></pre></td></tr></table></figure><p>到这里可能会发现这些和 <code>IO</code> 中几乎没有差别</p><h3 id="关闭-Socket-释放资源"><a href="#关闭-Socket-释放资源" class="headerlink" title="关闭 Socket 释放资源"></a>关闭 Socket 释放资源</h3><p>由于 <code>Socket</code> 建立了长连接，所以其是略微消耗资源的，因此用完可以使用 <code>close</code> 关闭连接</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.close()</span><br></pre></td></tr></table></figure><h2 id="服务端使用-Socket"><a href="#服务端使用-Socket" class="headerlink" title="服务端使用 Socket"></a>服务端使用 Socket</h2><h3 id="创建-ServerSocket对象"><a href="#创建-ServerSocket对象" class="headerlink" title="创建 ServerSocket对象"></a>创建 ServerSocket对象</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> serverSocket = ServerSocket(<span class="number">2333</span>)</span><br></pre></td></tr></table></figure><h3 id="等待客户端连接"><a href="#等待客户端连接" class="headerlink" title="等待客户端连接"></a>等待客户端连接</h3><p>创建 <code>ServerSocket</code> 对象后，可以使用 <code>accept()</code> 来等待客户端的连接，既然是等待，那么其肯定是要消耗时间的了，所以我们一般放在线程或协程中进行处理（<em>为了便于理解，本文使用线程来进行操作，如果你感兴趣，你可以去了解一下 <code>Kotlin</code> 的协程，他比线程拥有更高的效率并且消耗更少的资源，以后我可能会写一篇关于协程的博客</em>）。</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> client = serverSocket.accept()</span><br></pre></td></tr></table></figure><h3 id="向客户端中传输数据"><a href="#向客户端中传输数据" class="headerlink" title="向客户端中传输数据"></a>向客户端中传输数据</h3><p><strong><code>client</code> 是一个 <code>Socket</code> 对象，通过他我们完成与客户端之间的信息传输，具体用法和上面客户端中的 <code>Socket</code> 是一样的。</strong></p><p>也就是说，网络间的两个程序通过 <code>Socket</code> 建立连接，而 <code>Socket</code> 相当于他们的通讯工具，就像两个人打电话一样。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>上面的一大段可能让你对 <code>Socket</code> 有了一个大致的印象，通过这段代码示例可能会加深你的理解。<br>这段代码完成了一个简单的控制台聊天功能。<br></p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter</span><br><span class="line"><span class="keyword">import</span> java.lang.Exception</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket</span><br><span class="line"><span class="keyword">import</span> java.net.Socket</span><br><span class="line"><span class="keyword">import</span> kotlin.system.exitProcess</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> host = <span class="string">"127.0.0.1"</span>      <span class="comment">// 主机是本机</span></span><br><span class="line">    <span class="keyword">val</span> port = <span class="number">2333</span>     <span class="comment">// 使用 2333 端口</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 开启服务端</span></span><br><span class="line">        Thread &#123;</span><br><span class="line">            Server(port).update()</span><br><span class="line">        &#125;.start()</span><br><span class="line">        <span class="comment">// 开启客户端，纯客户端需要删除上面的服务端</span></span><br><span class="line">        Thread &#123;</span><br><span class="line">            ClientSocket(host, port).update()</span><br><span class="line">        &#125;.start()</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">        e.printStackTrace()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span></span>(port: <span class="built_in">Int</span>) : ServerSocket(port) &#123;</span><br><span class="line">    <span class="keyword">var</span> clientList = mutableListOf&lt;ClientHandler&gt;()</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">update</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">val</span> client = accept()</span><br><span class="line">            clientList.add(ClientHandler(client, <span class="keyword">this</span>).build())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">sendMessage</span><span class="params">(msg: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (x <span class="keyword">in</span> clientList) &#123;</span><br><span class="line">            x.write(msg)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ClientHandler</span></span>(client: Socket, <span class="keyword">var</span> target: Server) : Thread() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> reader = BufferedReader(InputStreamReader(client.getInputStream()))</span><br><span class="line">        <span class="keyword">var</span> writer = PrintWriter(client.getOutputStream(), <span class="literal">true</span>)    <span class="comment">// true 表示自动flush，不写true的话需要手动flush()</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">build</span><span class="params">()</span></span>: ClientHandler &#123;</span><br><span class="line">            start()</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">val</span> line = reader.readLine()</span><br><span class="line">                target.sendMessage(line)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">write</span><span class="params">(msg: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">            writer.println(<span class="string">"用户：<span class="variable">$msg</span>"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClientSocket</span></span>(host: String, port: <span class="built_in">Int</span>) : Socket(host, port) &#123;</span><br><span class="line">    <span class="keyword">var</span> reader = BufferedReader(InputStreamReader(inputStream))</span><br><span class="line">    <span class="keyword">var</span> writer = PrintWriter(outputStream, <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">update</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ReadHandler(reader).build()</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 从控制台读入</span></span><br><span class="line">            <span class="keyword">val</span> msg = readLine()</span><br><span class="line">            <span class="keyword">if</span> (msg == <span class="string">"exit"</span>) exitProcess(<span class="number">0</span>)</span><br><span class="line">            <span class="comment">// 向服务器写入</span></span><br><span class="line">            writer.println(msg)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启一个线程从服务器读取数据</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ReadHandler</span></span>(<span class="keyword">var</span> reader: BufferedReader) : Thread() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">build</span><span class="params">()</span></span>: ReadHandler &#123;</span><br><span class="line">            start()</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="comment">// 从服务器读取一行</span></span><br><span class="line">                <span class="keyword">val</span> line = reader.readLine()</span><br><span class="line">                <span class="comment">// 向控制台写入</span></span><br><span class="line">                println(line)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>上面的代码并不是面向过程式的进行演示，而是进行了一定的封装。<del>因为我知道封装后代码不如直接写容易懂，嗯我是故意的</del></p><p><img src="https://s1.ax1x.com/2018/12/05/Flr7p6.png" alt="运行效果图"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>学习 <code>Socket</code> 还是要多看代码，理解 <code>Socket</code> 的运行原理。下一篇博客<del>（也可能是很久之后的博客）</del>我会讲解使用 <code>Socket</code> 进行文件传输。最后附上这次微软作业的github链接：<a href="https://github.com/Grapedge/SocketChatClient" target="_blank" rel="noopener">Grapes Chat</a></p><p>这是效果图：<br><img src="https://camo.githubusercontent.com/75bfb5e12b0dd790eb9ad1a5569be7d5a9d0c6f3/68747470733a2f2f73312e617831782e636f6d2f323031382f31322f30352f466c74534d522e706e67" alt="效果"></p></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>如果觉得我的文章有用，可以支持我的继续创作</div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>支持</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Grapes 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="Grapes 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-tags"> <a href="/tags/Kotlin/" rel="tag"># Kotlin</a> <a href="/tags/Socket/" rel="tag"># Socket</a> <a href="/tags/网络/" rel="tag"># 网络</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2018/10/unity-2048/" rel="next" title="「Unity」开发2048小游戏"><i class="fa fa-chevron-left"></i> 「Unity」开发2048小游戏</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article></div></div><div class="comments" id="comments"><div id="disqus_thread"><noscript> Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Grapes"><p class="site-author-name" itemprop="name">Grapes</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">27</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">12</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">29</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/grapedge" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:grapedge@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-link"></i> Links</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"> <a href="https://oi.men.ci/" title="Menci" target="_blank">Menci</a></li><li class="links-of-blogroll-item"> <a href="https://lyoi.ac" title="LYOI" target="_blank">LYOI</a></li><li class="links-of-blogroll-item"> <a href="http://blog.lvguangfa.cn/" title="吕光发" target="_blank">吕光发</a></li></ul></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Http还是Socket？"><span class="nav-number">2.</span> <span class="nav-text">Http还是Socket？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Socket"><span class="nav-number">3.</span> <span class="nav-text">什么是Socket</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端使用-Socket"><span class="nav-number">4.</span> <span class="nav-text">客户端使用 Socket</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Socket-对象"><span class="nav-number">4.1.</span> <span class="nav-text">创建 Socket 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-Socket-输入输出流"><span class="nav-number">4.2.</span> <span class="nav-text">获取 Socket 输入输出流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向服务器读取或写入数据"><span class="nav-number">4.3.</span> <span class="nav-text">向服务器读取或写入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭-Socket-释放资源"><span class="nav-number">4.4.</span> <span class="nav-text">关闭 Socket 释放资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端使用-Socket"><span class="nav-number">5.</span> <span class="nav-text">服务端使用 Socket</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-ServerSocket对象"><span class="nav-number">5.1.</span> <span class="nav-text">创建 ServerSocket对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等待客户端连接"><span class="nav-number">5.2.</span> <span class="nav-text">等待客户端连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向客户端中传输数据"><span class="nav-number">5.3.</span> <span class="nav-text">向客户端中传输数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">6.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span><span class="with-love" id="animate"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">Grapes</span></div><div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a></div><div class="footer-custom">Hosted by <a target="_blank" rel="external nofollow" href="https://pages.coding.me"><b>Coding Pages</b></a></div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="site-uv" title="总访客量"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span><span class="site-pv" title="总访问量"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script><script type="text/javascript" src="/lib/three/three.min.js"></script><script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script><script id="dsq-count-scr" src="https://grapedge-1.disqus.com/count.js" async></script><script type="text/javascript">var disqus_config=function(){this.page.url="http://blog.grapedge.top/2018/12/socket-begin/",this.page.identifier="2018/12/socket-begin/",this.page.title="「Kotlin」Socket入门"};function loadComments(){var e=document,t=e.createElement("script");t.src="https://grapedge-1.disqus.com/embed.js",t.setAttribute("data-timestamp",""+ +new Date),(e.head||e.body).appendChild(t)}loadComments()</script><script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script><script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><style>.copy-btn{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;user-select:none;outline:0}.highlight-wrap .copy-btn{transition:opacity .3s ease-in-out;opacity:0;padding:2px 6px;position:absolute;right:4px;top:8px}.highlight-wrap .copy-btn:focus,.highlight-wrap:hover .copy-btn{opacity:1}.highlight-wrap{position:relative}</style><script>$(".highlight").each(function(t,e){var n=$("<div>").addClass("highlight-wrap");$(e).after(n),n.append($("<button>").addClass("copy-btn").append("复制").on("click",function(t){var e=$(this).parent().find(".code").find(".line").map(function(t,e){return $(e).text()}).toArray().join("\n"),n=document.createElement("textarea");document.body.appendChild(n),n.style.position="absolute",n.style.top="0px",n.style.left="0px",n.value=e,n.select(),n.focus();var o=document.execCommand("copy");document.body.removeChild(n),o?$(this).text("复制成功"):$(this).text("复制失败"),$(this).blur()})).on("mouseleave",function(t){var e=$(this).find(".copy-btn");setTimeout(function(){e.text("复制")},300)}).append(e)})</script></body></html>

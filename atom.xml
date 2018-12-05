@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2018-10-31T01:49:52.692Z</updated>
+  <updated>2018-12-05T10:17:03.421Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>「Kotlin」Socket入门</title>
+    <link href="http://blog.grapedge.top/2018/12/socket-begin/"/>
+    <id>http://blog.grapedge.top/2018/12/socket-begin/</id>
+    <published>2018-12-05T08:50:00.000Z</published>
+    <updated>2018-12-05T10:17:03.421Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;这周的微软学生俱乐部的作业是完成一个简易的聊天系统，本篇博客将以此为主题进行探讨。&lt;code&gt;Socket&lt;/code&gt; ，译作套接字（台湾翻译为網路插座），就可以用作网络上两个程序间的数据交换。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Kotlin" scheme="http://blog.grapedge.top/categories/Kotlin/"/>
+    
+      <category term="Socket" scheme="http://blog.grapedge.top/categories/Kotlin/Socket/"/>
+    
+    
+      <category term="Kotlin" scheme="http://blog.grapedge.top/tags/Kotlin/"/>
+    
+      <category term="Socket" scheme="http://blog.grapedge.top/tags/Socket/"/>
+    
+      <category term="网络" scheme="http://blog.grapedge.top/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>「Unity」开发2048小游戏</title>
     <link href="http://blog.grapedge.top/2018/10/unity-2048/"/>
     <id>http://blog.grapedge.top/2018/10/unity-2048/</id>
     <published>2018-10-31T12:50:00.000Z</published>
-    <updated>2018-10-31T01:49:52.692Z</updated>
+    <updated>2018-12-05T08:33:26.864Z</updated>
     
     <summary type="html">
     
@@ -501,30 +527,6 @@
       <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
     
       <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「UVa10375」Choose and Divide</title>
-    <link href="http://blog.grapedge.top/2016/11/uva10375/"/>
-    <id>http://blog.grapedge.top/2016/11/uva10375/</id>
-    <published>2016-11-09T07:40:00.000Z</published>
-    <updated>2018-07-01T01:28:27.855Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;已知 $C(m, n) = m! \div (n! \times (m-n)!)$，求$C(p,q)\div C(r,s)$，其中 $p,q,r,s \leq 10000$&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
-    
-      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
     
   </entry>
   
