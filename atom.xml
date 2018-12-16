@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2018-12-05T10:17:03.421Z</updated>
+  <updated>2018-12-16T04:50:27.616Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「ICPC」C++11 部分特性</title>
+    <link href="http://blog.grapedge.top/2018/12/icpc-cpp/"/>
+    <id>http://blog.grapedge.top/2018/12/icpc-cpp/</id>
+    <published>2018-12-16T03:50:00.000Z</published>
+    <updated>2018-12-16T04:50:27.616Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;在 &lt;code&gt;ICPC 实验室&lt;/code&gt; 了解到 &lt;code&gt;ICPC&lt;/code&gt; 赛事可以使用 &lt;code&gt;C++11&lt;/code&gt;，回去之后查到 &lt;code&gt;ICPC&lt;/code&gt; 赛事的&lt;a href=&quot;https://icpc.baylor.edu/worldfinals/programming-environment&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;编译命令&lt;/a&gt;为：&lt;code&gt;g++ -g -O2 -std=gnu++14 -static ${files}&lt;/code&gt; 。也就是说甚至可以使用 &lt;code&gt;C++14&lt;/code&gt; 标准，一想到要告别写了那么多年的 &lt;code&gt;C++98&lt;/code&gt; 就很激动哈哈哈哈。&lt;strong&gt;这篇文章的定位是由 &lt;code&gt;C++98&lt;/code&gt; 标准转到 &lt;code&gt;C++14&lt;/code&gt; 标准，所以一些内容可能是 &lt;code&gt;C++14&lt;/code&gt; 的特性。&lt;/strong&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="ICPC" scheme="http://blog.grapedge.top/categories/ICPC/"/>
+    
+      <category term="C++" scheme="http://blog.grapedge.top/categories/ICPC/C/"/>
+    
+    
+      <category term="ICPC" scheme="http://blog.grapedge.top/tags/ICPC/"/>
+    
+      <category term="ACM" scheme="http://blog.grapedge.top/tags/ACM/"/>
+    
+      <category term="C++" scheme="http://blog.grapedge.top/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>「Kotlin」Socket入门</title>
@@ -503,30 +529,6 @@
       <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
     
       <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>欧拉函数</title>
-    <link href="http://blog.grapedge.top/2016/11/euler-note/"/>
-    <id>http://blog.grapedge.top/2016/11/euler-note/</id>
-    <published>2016-11-09T09:10:00.000Z</published>
-    <updated>2018-07-01T01:08:50.647Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;欧拉函数&quot;&gt;&lt;a href=&quot;#欧拉函数&quot; class=&quot;headerlink&quot; title=&quot;欧拉函数&quot;&gt;&lt;/a&gt;欧拉函数&lt;/h2&gt;&lt;p&gt;欧拉函数定义为&lt;strong&gt;小于等于n的数中与n互质的数的数目&lt;/strong&gt;。设 $n$ 的唯一分解式：$n = p_1^{a_1}p_2^{a_2}p_3^{a_3}\dots p_k^{a_k}$。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
-    
-      <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   

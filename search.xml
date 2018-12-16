@@ -4,6 +4,47 @@
   
     
     <entry>
+      <title><![CDATA[「ICPC」C++11 部分特性]]></title>
+      <url>http://blog.grapedge.top/2018/12/icpc-cpp/</url>
+      <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在 <code>ICPC 实验室</code> 了解到 <code>ICPC</code> 赛事可以使用 <code>C++11</code>，回去之后查到 <code>ICPC</code> 赛事的<a href="https://icpc.baylor.edu/worldfinals/programming-environment" target="_blank" rel="noopener">编译命令</a>为：<code>g++ -g -O2 -std=gnu++14 -static ${files}</code> 。也就是说甚至可以使用 <code>C++14</code> 标准，一想到要告别写了那么多年的 <code>C++98</code> 就很激动哈哈哈哈。<strong>这篇文章的定位是由 <code>C++98</code> 标准转到 <code>C++14</code> 标准，所以一些内容可能是 <code>C++14</code> 的特性。</strong><br><a id="more"></a></p>
+<h2 id="自动类型推导"><a href="#自动类型推导" class="headerlink" title="自动类型推导"></a>自动类型推导</h2><p>在 <code>C#、Python</code> 等一些语言中我们可以使用类似于 <code>var</code> 的关键字让程序自动推导变量的类型。<br>在 <code>C++11</code> 中，我们可以使用 <code>auto</code> 来实现类似的效果，<code>auto</code> 会根据后面表达式值的类型推断出变量的类型。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;	<span class="comment">// C++98</span></span><br><span class="line"><span class="keyword">auto</span> b = <span class="number">6</span>;	<span class="comment">//C++11</span></span><br></pre></td></tr></table></figure>
+<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p><code>lambda 表达式</code> 又可以叫做 <code>匿名函数</code> ，语法如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[capture](params)-&gt; &#123;body&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><code>capture</code> 用于捕获外部变量，<code>params</code> 相当于定义函数时的参数，<code>body</code> 就是函数的具体内容了。</p>
+<h3 id="从大到小排序"><a href="#从大到小排序" class="headerlink" title="从大到小排序"></a>从大到小排序</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::sort(a, a + n, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) &#123;<span class="keyword">return</span> a &gt; b;&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>我们注意到参数中可以使用 <code>auto</code> 关键字，这是在 C++14 中引入的，C++11需要指定其类型</strong>。</p>
+<h2 id="for-循环遍历"><a href="#for-循环遍历" class="headerlink" title="for 循环遍历"></a>for 循环遍历</h2><p>例如上面的排序程序，我们使用以前的写法（只看 for 循环的部分）是这个样子的：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; n; i++) vec.push_back(rand() % <span class="number">101</span>);</span><br><span class="line">    <span class="built_in">std</span>::sort(vec.begin(), vec.end(), [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) &#123;<span class="keyword">return</span> a &gt; b;&#125;);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; vec.size(); i++) <span class="built_in">printf</span>(<span class="string">"%d "</span>, vec[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在我们可以使用一种类似于 <code>foreach</code> 的写法来代替最后的输出语句：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> i : vec) <span class="built_in">printf</span>(<span class="string">"%d "</span>, i);</span><br></pre></td></tr></table></figure></p>
+<p>又或者你需要改变其原始数据：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : vec) i = <span class="number">5</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="空指针-nullptr"><a href="#空指针-nullptr" class="headerlink" title="空指针 nullptr"></a>空指针 nullptr</h2><p>之前的代码中如果要表示一个空值，我们可能会使用 <code>NULL</code>，但其本质是一个常量 <code>0</code> ，这样可能会造成一定的整数和指针的混淆。</p>
+<p>现在我们可以这么写：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> t = <span class="literal">nullptr</span>;	<span class="comment">// 报错，因为nullptr是空指针而不是原来的整数 0 了</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="与数组相似的初始化容器"><a href="#与数组相似的初始化容器" class="headerlink" title="与数组相似的初始化容器"></a>与数组相似的初始化容器</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span>&gt; <span class="built_in">map</span> &#123; &#123;<span class="string">"key"</span>, <span class="number">2</span>&#125;, &#123;<span class="string">"k2"</span>, <span class="number">3</span>&#125; &#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="哈希容器"><a href="#哈希容器" class="headerlink" title="哈希容器"></a>哈希容器</h2><p><code>C++98</code> 中有基于 <code>平衡树</code> 的 <code>map</code> 容器，其效率自然也比较低，<code>C++11</code> 中引入了 <code>unordered_map</code>、<code>unordered_set</code>、<code>unordered_multimap</code> 和 <code>unordered_multiset</code> 让查询变得更快。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这篇博客只介绍了 <code>C++11</code> 的小部分常用特性，像是右值引用、智能指针等都没有介绍，当然，以后我可能还会补充其他的内容。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> ICPC </category>
+            
+            <category> C++ </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> ICPC </tag>
+            
+            <tag> ACM </tag>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[「Kotlin」Socket入门]]></title>
       <url>http://blog.grapedge.top/2018/12/socket-begin/</url>
       <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>这周的微软学生俱乐部的作业是完成一个简易的聊天系统，本篇博客将以此为主题进行探讨。<code>Socket</code> ，译作套接字（台湾翻译为網路插座），就可以用作网络上两个程序间的数据交换。<br><a id="more"></a></p>
