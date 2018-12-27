@@ -164,7 +164,7 @@
 <meta property="og:site_name" content="Grapedge">
 <meta property="og:description" content="简介在 ICPC 实验室 了解到 ICPC 赛事可以使用 C++11，回去之后查到 ICPC 赛事的编译命令为：g++ -g -O2 -std=gnu++14 -static ${files} 。也就是说甚至可以使用 C++14 标准，一想到要告别写了那么多年的 C++98 就很激动哈哈哈哈。这篇文章的定位是由 C++98 标准转到 C++14 标准，所以一些内容可能是 C++14 的特性。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-16T04:50:27.616Z">
+<meta property="og:updated_time" content="2018-12-27T08:23:13.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「ICPC」C++11 部分特性">
 <meta name="twitter:description" content="简介在 ICPC 实验室 了解到 ICPC 赛事可以使用 C++11，回去之后查到 ICPC 赛事的编译命令为：g++ -g -O2 -std=gnu++14 -static ${files} 。也就是说甚至可以使用 C++14 标准，一想到要告别写了那么多年的 C++98 就很激动哈哈哈哈。这篇文章的定位是由 C++98 标准转到 C++14 标准，所以一些内容可能是 C++14 的特性。">
@@ -521,8 +521,8 @@
         <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在 <code>ICPC 实验室</code> 了解到 <code>ICPC</code> 赛事可以使用 <code>C++11</code>，回去之后查到 <code>ICPC</code> 赛事的<a href="https://icpc.baylor.edu/worldfinals/programming-environment" target="_blank" rel="noopener">编译命令</a>为：<code>g++ -g -O2 -std=gnu++14 -static ${files}</code> 。也就是说甚至可以使用 <code>C++14</code> 标准，一想到要告别写了那么多年的 <code>C++98</code> 就很激动哈哈哈哈。<strong>这篇文章的定位是由 <code>C++98</code> 标准转到 <code>C++14</code> 标准，所以一些内容可能是 <code>C++14</code> 的特性。</strong><br><a id="more"></a></p>
 <h2 id="自动类型推导"><a href="#自动类型推导" class="headerlink" title="自动类型推导"></a>自动类型推导</h2><p>在 <code>C#、Python</code> 等一些语言中我们可以使用类似于 <code>var</code> 的关键字让程序自动推导变量的类型。<br>在 <code>C++11</code> 中，我们可以使用 <code>auto</code> 来实现类似的效果，<code>auto</code> 会根据后面表达式值的类型推断出变量的类型。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;	<span class="comment">// C++98</span></span><br><span class="line"><span class="keyword">auto</span> b = <span class="number">6</span>;	<span class="comment">//C++11</span></span><br></pre></td></tr></table></figure>
-<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p><code>lambda 表达式</code> 又可以叫做 <code>匿名函数</code> ，语法如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[capture](params)-&gt; &#123;body&#125;;</span><br></pre></td></tr></table></figure></p>
-<p><code>capture</code> 用于捕获外部变量，<code>params</code> 相当于定义函数时的参数，<code>body</code> 就是函数的具体内容了。</p>
+<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p><code>lambda 表达式</code> 又可以叫做 <code>匿名函数</code> ，语法如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[capture](params)-&gt;ret &#123;body&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><code>capture</code> 用于捕获外部变量，<code>params</code> 相当于定义函数时的参数，<code>ret</code> 表示返回类型，<code>body</code> 就是函数的具体内容了。</p>
 <h3 id="从大到小排序"><a href="#从大到小排序" class="headerlink" title="从大到小排序"></a>从大到小排序</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::sort(a, a + n, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) &#123;<span class="keyword">return</span> a &gt; b;&#125;)</span><br></pre></td></tr></table></figure>
 <p><strong>我们注意到参数中可以使用 <code>auto</code> 关键字，这是在 C++14 中引入的，C++11需要指定其类型</strong>。</p>
 <h2 id="for-循环遍历"><a href="#for-循环遍历" class="headerlink" title="for 循环遍历"></a>for 循环遍历</h2><p>例如上面的排序程序，我们使用以前的写法（只看 for 循环的部分）是这个样子的：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; n; i++) vec.push_back(rand() % <span class="number">101</span>);</span><br><span class="line">    <span class="built_in">std</span>::sort(vec.begin(), vec.end(), [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) &#123;<span class="keyword">return</span> a &gt; b;&#125;);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; vec.size(); i++) <span class="built_in">printf</span>(<span class="string">"%d "</span>, vec[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -864,6 +864,14 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="http://blog.lvguangfa.cn/" title="吕光发" target="_blank">吕光发</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://5261.github.io/" title="Hellc" target="_blank">Hellc</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://7d.beer/" title="7D" target="_blank">7D</a>
                   </li>
                 
               </ul>
