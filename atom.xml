@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2018-12-27T08:23:13.916Z</updated>
+  <updated>2019-01-19T09:05:22.322Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「Unity」制作一个桌面精灵</title>
+    <link href="http://blog.grapedge.top/2019/01/desktop-wizard/"/>
+    <id>http://blog.grapedge.top/2019/01/desktop-wizard/</id>
+    <published>2019-01-19T08:50:00.000Z</published>
+    <updated>2019-01-19T09:05:22.322Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;本博客中的内容只适用于Windows，原理是调用Win的底层函数修改窗体效果，如果您学过Win32编程并用它实现过一个窗体，那本篇博客的内容对您应该不难理解。这是实现效果图：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
+    
+      <category term="实战" scheme="http://blog.grapedge.top/categories/Unity/%E5%AE%9E%E6%88%98/"/>
+    
+    
+      <category term="Shader" scheme="http://blog.grapedge.top/tags/Shader/"/>
+    
+      <category term="实战" scheme="http://blog.grapedge.top/tags/%E5%AE%9E%E6%88%98/"/>
+    
+      <category term="Win32" scheme="http://blog.grapedge.top/tags/Win32/"/>
+    
+  </entry>
   
   <entry>
     <title>「ICPC」C++11 部分特性</title>
@@ -503,32 +529,6 @@
     
     
       <category term="差分" scheme="http://blog.grapedge.top/tags/%E5%B7%AE%E5%88%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「UVa10820」Send a Table</title>
-    <link href="http://blog.grapedge.top/2016/11/send-a-table/"/>
-    <id>http://blog.grapedge.top/2016/11/send-a-table/</id>
-    <published>2016-11-10T01:31:25.000Z</published>
-    <updated>2018-07-01T01:30:33.791Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;已知通过 $f(x,y)$ 可以计算 $f(x \times k, y \times k), k\in N^*$ ，求最少需要多少个 $f(x,y)$ 使得任意 $x, y \in [1,n]$ 均能够被计算出来。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="数论" scheme="http://blog.grapedge.top/tags/%E6%95%B0%E8%AE%BA/"/>
-    
-      <category term="欧拉函数" scheme="http://blog.grapedge.top/tags/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
     
   </entry>
   
