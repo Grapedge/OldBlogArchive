@@ -156,18 +156,23 @@
 
 
 
-  <meta name="description" content="简单的引例在射击游戏中角色通常会进行子弹的发射，一种较为直观的解决方案发射子弹时对子弹预设进行实例化，但实际上这样做将会占用大量资源且速度较慢。而对于诸如子弹创建这样大量而又对速度要求高的需求，通常使用对象池Object Pool来完成。">
-<meta name="keywords" content="Object Pool">
+  <meta name="description" content="简介坦克动荡（Tank Trouble）是一款出色的小游戏，如果你还没有玩过这款游戏，你可以在TANK TROUBLE来体验这款游戏。正好微软学生俱乐部的寒假任务中有制作坦克大战的游戏，我便想仿制一款3D 的 TANK TROUBLE（做3D其实是因为太长时间没碰过2D的内容了，印象中上次碰2D还是刚出Sprite的时候）。下面是本篇博客实现的效果（1.5MB）：">
+<meta name="keywords" content="Unity,实战">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「Unity」对象池的简单使用">
-<meta property="og:url" content="http://blog.grapedge.top/2016/10/sample-object-pool/index.html">
+<meta property="og:title" content="「Unity」坦克动荡小游戏（一）">
+<meta property="og:url" content="http://blog.grapedge.top/2018/10/unity-tank-trouble1/index.html">
 <meta property="og:site_name" content="Grapedge">
-<meta property="og:description" content="简单的引例在射击游戏中角色通常会进行子弹的发射，一种较为直观的解决方案发射子弹时对子弹预设进行实例化，但实际上这样做将会占用大量资源且速度较慢。而对于诸如子弹创建这样大量而又对速度要求高的需求，通常使用对象池Object Pool来完成。">
+<meta property="og:description" content="简介坦克动荡（Tank Trouble）是一款出色的小游戏，如果你还没有玩过这款游戏，你可以在TANK TROUBLE来体验这款游戏。正好微软学生俱乐部的寒假任务中有制作坦克大战的游戏，我便想仿制一款3D 的 TANK TROUBLE（做3D其实是因为太长时间没碰过2D的内容了，印象中上次碰2D还是刚出Sprite的时候）。下面是本篇博客实现的效果（1.5MB）：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-01T01:20:36.646Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/02/05/kY8P78.gif">
+<meta property="og:image" content="https://s2.ax1x.com/2019/02/05/kY8Hvn.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/02/05/kY8x5F.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/02/06/kYJtw6.png">
+<meta property="og:updated_time" content="2019-02-05T16:16:04.513Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「Unity」对象池的简单使用">
-<meta name="twitter:description" content="简单的引例在射击游戏中角色通常会进行子弹的发射，一种较为直观的解决方案发射子弹时对子弹预设进行实例化，但实际上这样做将会占用大量资源且速度较慢。而对于诸如子弹创建这样大量而又对速度要求高的需求，通常使用对象池Object Pool来完成。">
+<meta name="twitter:title" content="「Unity」坦克动荡小游戏（一）">
+<meta name="twitter:description" content="简介坦克动荡（Tank Trouble）是一款出色的小游戏，如果你还没有玩过这款游戏，你可以在TANK TROUBLE来体验这款游戏。正好微软学生俱乐部的寒假任务中有制作坦克大战的游戏，我便想仿制一款3D 的 TANK TROUBLE（做3D其实是因为太长时间没碰过2D的内容了，印象中上次碰2D还是刚出Sprite的时候）。下面是本篇博客实现的效果（1.5MB）：">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/02/05/kY8P78.gif">
 
 
 
@@ -176,7 +181,7 @@
 
 
 
-  <link rel="canonical" href="http://blog.grapedge.top/2016/10/sample-object-pool/"/>
+  <link rel="canonical" href="http://blog.grapedge.top/2018/10/unity-tank-trouble1/"/>
 
 
 
@@ -186,7 +191,7 @@
   };
 </script>
 
-  <title>「Unity」对象池的简单使用 | Grapedge</title>
+  <title>「Unity」坦克动荡小游戏（一） | Grapedge</title>
   
 
 
@@ -397,7 +402,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.grapedge.top/2016/10/sample-object-pool/">
+    <link itemprop="mainEntityOfPage" href="http://blog.grapedge.top/2018/10/unity-tank-trouble1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Grapes">
@@ -414,7 +419,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">「Unity」对象池的简单使用
+          <h1 class="post-title" itemprop="name headline">「Unity」坦克动荡小游戏（一）
               
             
           </h1>
@@ -439,7 +444,7 @@
                 
               
 
-              <time title="创建时间：2016-10-31 21:24:58" itemprop="dateCreated datePublished" datetime="2016-10-31T21:24:58+08:00">2016-10-31</time>
+              <time title="创建时间：2018-10-14 20:50:00" itemprop="dateCreated datePublished" datetime="2018-10-14T20:50:00+08:00">2018-10-14</time>
             
 
             
@@ -464,7 +469,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/实战/" itemprop="url" rel="index"><span itemprop="name">实战</span></a></span>
 
                 
                 
@@ -479,10 +484,10 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/10/sample-object-pool/#comments" itemprop="discussionUrl">
+                <a href="/2018/10/unity-tank-trouble1/#comments" itemprop="discussionUrl">
                 
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/sample-object-pool/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/10/unity-tank-trouble1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -518,31 +523,34 @@
       
 
       
-        <h2 id="简单的引例"><a href="#简单的引例" class="headerlink" title="简单的引例"></a>简单的引例</h2><p>在射击游戏中角色通常会进行子弹的发射，一种较为直观的解决方案发射子弹时对子弹预设进行实例化，但实际上这样做将会占用大量资源且速度较慢。而对于诸如子弹创建这样大量而又对速度要求高的需求，通常使用对象池<code>Object Pool</code>来完成。</p>
-<a id="more"></a>
-<h2 id="简单的思想"><a href="#简单的思想" class="headerlink" title="简单的思想"></a>简单的思想</h2><p>对象池听上去比较的高大上，但其思想却非常简单。有一个由你自定义大小的<del>游泳</del>池（当然里面没有水），你可以提前将游戏物体生成，并放进这个池子中，用的时候在取出来。就是这么简单的思想。</p>
-<h2 id="子弹的创建"><a href="#子弹的创建" class="headerlink" title="子弹的创建"></a>子弹的创建</h2><p>就像是子弹创建一样，我们可以提前在游戏加载时创建好所需要的子弹（比如100发子弹）并放进准备好的一个对象池中，当按下开火键时将对象池中剩下的子弹随便拿出来一发，放到枪口，发射出去，当这枚子弹达到射程后，再把它放回对象池中。</p>
-<h2 id="简单的实现"><a href="#简单的实现" class="headerlink" title="简单的实现"></a>简单的实现</h2><ul>
-<li>在<code>Inspector</code>面板中的预设对象，比如子弹<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Transform[] bulletPoolObjects;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] bulletPoolSize;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>很容易发现这是两个数组，<code>bulletPoolObjects</code>表示的是子弹预设，当然子弹可能有多种（子弹、炮弹、石头、<del>愤怒的小鸟</del>），所以他是一个数组，下面的<code>bulletPoolSize</code>表示的是这些子弹中相对应的每种子弹的对象池大小。</p>
-<ul>
-<li>创建对象池</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Dictionary&lt;Transform, Transform[]&gt; bulletPool;</span><br></pre></td></tr></table></figure>
-<p>这是一个映射，其key为bulletPoolObjects中的一种子弹，value表示这种子弹的对象池。</p>
-<ul>
-<li><p>初始化对象池</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bulletPool = <span class="keyword">new</span> Dictionary&lt;Transform, Transform[]&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bulletPoolObjects.Length; i++) &#123;</span><br><span class="line">    Transform[] curItems = <span class="keyword">new</span> Transform[bulletPoolSize[i]];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; bulletPoolSize[i]; j++) &#123;</span><br><span class="line">        Transform trs = (Instantiate(bulletPoolObjects[i], Vector3.zero, Quaternion.identity) <span class="keyword">as</span> GameObject).transform;</span><br><span class="line">        trs.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">        trs.parent = transform;</span><br><span class="line"></span><br><span class="line">        curItems[j] = trs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bulletPool.Add(bulletPoolObjects[i], curItems);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从对象池中取出对象</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Transform <span class="title">Spawn</span>(<span class="params">Transform obj, Vector3 pos, Quaternion rot, Transform parent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bulletPool[obj].Length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!bulletPool[obj][i].gameObject.activeSelf) &#123;</span><br><span class="line"></span><br><span class="line">            Transform spawnItem = bulletPool[obj][i];</span><br><span class="line"></span><br><span class="line">            spawnItem.parent = parent;</span><br><span class="line">            spawnItem.position = pos;</span><br><span class="line">            spawnItem.rotation = rot;</span><br><span class="line">                </span><br><span class="line">            spawnItem.gameObject.SetActive(<span class="literal">true</span>);</span><br><span class="line">            spawnItem.BroadcastMessage(<span class="string">"OnSpawned"</span>, SendMessageOptions.DontRequireReceiver);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> spawnItem;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>放回对象池<br>放回对象池只需要将这个物体的<code>active</code>设为<code>false</code>就可以了。</p>
-</li>
-</ul>
-<h2 id="最后…"><a href="#最后…" class="headerlink" title="最后…"></a>最后…</h2><p>一次new一个新对象不如一次new很多个对象要快…</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>坦克动荡</code>（Tank Trouble）是一款出色的小游戏，如果你还没有玩过这款游戏，你可以在<a href="https://tanktrouble.com/" target="_blank" rel="noopener">TANK TROUBLE</a>来体验这款游戏。正好微软学生俱乐部的寒假任务中有制作坦克大战的游戏，我便想仿制一款<code>3D</code> 的 <code>TANK TROUBLE</code>（做3D其实是因为太长时间没碰过2D的内容了，印象中上次碰2D还是刚出Sprite的时候）。下面是本篇博客实现的效果（1.5MB）：<br><a id="more"></a></p>
+<p><img src="https://s2.ax1x.com/2019/02/05/kY8P78.gif" alt="kY8P78.gif"></p>
+<blockquote>
+<p>阅读本篇需要掌握Unity的基本操作以及拥有一定的C#基础</p>
+</blockquote>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="资源的导入"><a href="#资源的导入" class="headerlink" title="资源的导入"></a>资源的导入</h3><p>本项目中的资源来自资源商店中的 <code>Tanks！Tutorial</code>，这是一个免费的资源。导入后保留：坦克模型、材质、音效、炮弹和坦克爆炸的粒子效果，然后移除无用的资源。</p>
+<h3 id="场景搭建"><a href="#场景搭建" class="headerlink" title="场景搭建"></a>场景搭建</h3><h4 id="创建墙壁预设"><a href="#创建墙壁预设" class="headerlink" title="创建墙壁预设"></a>创建墙壁预设</h4><p>创建一个 <code>Cube</code>，将其 <code>position</code> 设置为 <code>(0, 1.5, 0)</code>，<code>scale</code> 设置为 <code>(1, 3, 1)</code>，重命名为 <code>Wall</code>，保存为 <code>prefab</code>。创建预设是因为之后会做随机生成地图功能。</p>
+<h4 id="搭建场景"><a href="#搭建场景" class="headerlink" title="搭建场景"></a>搭建场景</h4><p>通过复制、调整墙壁的 <code>Transform</code> ，完成场景的搭建。<br><img src="https://s2.ax1x.com/2019/02/05/kY8Hvn.png" alt="kY8Hvn.png"></p>
+<h4 id="创建坦克预设"><a href="#创建坦克预设" class="headerlink" title="创建坦克预设"></a>创建坦克预设</h4><p>从 <code>Models</code> 中找到 <code>Tank</code> 模型，拖入 <code>Hierarchy</code>，将其标签改为 <code>Player</code> 并保存为预制体。</p>
+<h2 id="坦克的操控"><a href="#坦克的操控" class="headerlink" title="坦克的操控"></a>坦克的操控</h2><p>经过分析，坦克有以下行为：<code>移动</code>、<code>旋转</code>、<code>开火</code>、<code>死亡</code>。<br>为坦克添加刚体组件，然后创建合适的碰撞器，我推荐碰撞器的大小比合适要略小一些，因为虽然可能会出现轻微的穿模现象，但可以提升玩家的游戏体验。<br><img src="https://s2.ax1x.com/2019/02/05/kY8x5F.png" alt="kY8x5F.png"></p>
+<h3 id="坦克移动"><a href="#坦克移动" class="headerlink" title="坦克移动"></a>坦克移动</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Move</span>(<span class="params"><span class="keyword">float</span> v</span>) </span>&#123;</span><br><span class="line">	Vector3 offset = transform.forward * moveSpeed * v * Time.deltaTime;</span><br><span class="line">    mRigidbody.MovePosition(transform.position + offset);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="坦克旋转"><a href="#坦克旋转" class="headerlink" title="坦克旋转"></a>坦克旋转</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Turn</span>(<span class="params"><span class="keyword">float</span> h</span>) </span>&#123;</span><br><span class="line">	Quaternion delta = Quaternion.AngleAxis(turnSpeed * h * Time.deltaTime, Vector3.up);</span><br><span class="line">	mRigidbody.MoveRotation(transform.rotation * delta);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="坦克开火"><a href="#坦克开火" class="headerlink" title="坦克开火"></a>坦克开火</h3><p>开火我们会设置一个开火间隔，也就是装填炮弹的时间。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	mReloadTimer += Time.deltaTime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Fire</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (mReloadTimer &gt;= reloadTime) &#123;</span><br><span class="line">		mReloadTimer = <span class="number">0</span>f;</span><br><span class="line">		<span class="comment">// 创建子弹预制体</span></span><br><span class="line">		GameObject obj = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation) <span class="keyword">as</span> GameObject;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="坦克销毁"><a href="#坦克销毁" class="headerlink" title="坦克销毁"></a>坦克销毁</h3><p>通过创建一个爆炸粒子特效然后销毁游戏物体实现，如果你想实现的真实一点，你可以创建一个坦克报废的模型，或是修改 <code>Mesh</code> 来实现最真实的爆炸效果（当然，资源商店里也有对应的插件）。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Die</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	Instantiate(tankExplosion, transform.position + Vector3.up * <span class="number">1.5</span>f, Quaternion.identity);</span><br><span class="line">	Destroy(gameObject);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="检测输入"><a href="#检测输入" class="headerlink" title="检测输入"></a>检测输入</h3><p>创建 <code>TankController.cs</code></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line">[<span class="meta">RequireComponent(typeof(Tank))</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TankController</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">	<span class="comment">// 通过修改下面这些变量可以实现自定义按键的效果</span></span><br><span class="line">    <span class="comment">// 当然也可以通过GetAxis实现，这里用这种方式是</span></span><br><span class="line">    <span class="comment">// 因为我感觉这种实现方式比较直观</span></span><br><span class="line">	<span class="keyword">public</span> KeyCode moveForward = KeyCode.W;</span><br><span class="line">	<span class="keyword">public</span> KeyCode moveBack = KeyCode.S;</span><br><span class="line">	<span class="keyword">public</span> KeyCode turnLeft = KeyCode.A;</span><br><span class="line">	<span class="keyword">public</span> KeyCode turnRight = KeyCode.D;</span><br><span class="line">	<span class="keyword">public</span> KeyCode fire1 = KeyCode.Space;</span><br><span class="line">	<span class="keyword">public</span> KeyCode fire2 = KeyCode.Q;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Tank mTank;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		mTank = GetComponent&lt;Tank&gt;();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixedUpdate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">float</span> v = <span class="number">0</span>f;</span><br><span class="line">		<span class="keyword">float</span> h = <span class="number">0</span>f;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 获取输入量</span></span><br><span class="line">		v += Input.GetKey(moveForward) ? <span class="number">1</span>f : <span class="number">0</span>f;</span><br><span class="line">		v -= Input.GetKey(moveBack) ? <span class="number">1</span>f : <span class="number">0</span>f;</span><br><span class="line">		h += Input.GetKey(turnRight) ? <span class="number">1</span>f : <span class="number">0</span>f;</span><br><span class="line">		h -= Input.GetKey(turnLeft) ? <span class="number">1</span>f : <span class="number">0</span>f;</span><br><span class="line"></span><br><span class="line">		mTank.Move(v);</span><br><span class="line">		mTank.Turn(h);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (Input.GetKeyDown(fire1) || Input.GetKeyDown(fire2)) &#123;</span><br><span class="line">			mTank.Fire();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h3><p>如果你在做坦克对战游戏并找到了这篇博客，你可能想要实现以下功能（这篇博客不会实现，但会给你提供思路）</p>
+<h4 id="炮塔旋转"><a href="#炮塔旋转" class="headerlink" title="炮塔旋转"></a>炮塔旋转</h4><p>导入模型后可以发现模型分为了若干层次，一般的，你可以在子物体中找到对应的炮塔，你只需要对其进行旋转操作即可。如果你发现并没有绕着想要的点旋转，那么你可以检测编辑器是否切换到了 <code>center</code>，如果是 <code>pivot</code>，那就说明这个建模不是很规范，你可以通过给炮塔创建一个空的父对象，调整父对象到正确的位置，然后旋转父对象带动炮塔即可。<br><img src="https://s2.ax1x.com/2019/02/06/kYJtw6.png" alt="kYJtw6.png"></p>
+<h4 id="履带移动"><a href="#履带移动" class="headerlink" title="履带移动"></a>履带移动</h4><p>你可能会发现上面的实现其实是拖着坦克走，而履带并没有移动。很遗憾，这个坦克模型的履带已经成型，但对于其他的正常的模型来说，你可以找到履带这个物体，然后修改其材质的<code>offset</code>，你可能就会看到你想要的效果。</p>
+<h4 id="履带适应地形"><a href="#履带适应地形" class="headerlink" title="履带适应地形"></a>履带适应地形</h4><p>建议使用插件，例如<code>physics tank maker</code>，因为代码量挺大的。</p>
+<h2 id="子弹的实现"><a href="#子弹的实现" class="headerlink" title="子弹的实现"></a>子弹的实现</h2><p>做到一半发现其实坦克发射的应该叫炮弹（<code>shell</code>）？但我刚开始做的时候就按子弹 <code>bullet</code> 做的，所以也就不改了…</p>
+<p>创建一个 <code>Sphere</code>，将其修改为黑色，缩放设置为<code>(0.6, 0.6, 0.6)</code>，保存为子弹预置。</p>
+<p>添加 <code>Bullet.cs</code> 脚本<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line">[<span class="meta">RequireComponent(typeof(Rigidbody))</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bullet</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">float</span> bulletSpeed = <span class="number">10</span>f;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">float</span> lifeTime = <span class="number">12</span>f;</span><br><span class="line">	<span class="keyword">public</span> GameObject bulletExplosion;</span><br><span class="line">	<span class="keyword">private</span> Rigidbody mRigidbody;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">float</span> mLifeTimer = <span class="number">0</span>f;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">		mRigidbody = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">		<span class="comment">// 因为2D游戏子弹不会做自由落体，所以我们也就不修改其y坐标的位置</span></span><br><span class="line">		mRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;</span><br><span class="line">		mRigidbody.velocity = transform.forward * bulletSpeed;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">// 如果子弹存在时间大于生存时间则销毁</span></span><br><span class="line">		mLifeTimer += Time.deltaTime;</span><br><span class="line">		<span class="keyword">if</span> (mLifeTimer &gt; lifeTime) &#123;</span><br><span class="line">			DestoryBullet();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnCollisionEnter</span>(<span class="params">Collision other</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (other.collider.tag == <span class="string">"Player"</span>) &#123;</span><br><span class="line">			<span class="comment">// 击中玩家</span></span><br><span class="line">			other.gameObject.GetComponent&lt;Tank&gt;().Die();</span><br><span class="line">			DestoryBullet();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// 实现反射效果</span></span><br><span class="line">			transform.forward = Vector3.Reflect(transform.forward, other.contacts[<span class="number">0</span>].normal);</span><br><span class="line">			mRigidbody.velocity = transform.forward * bulletSpeed;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">DestoryBullet</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		Instantiate(bulletExplosion, transform.position + Vector3.up * <span class="number">1.5</span>f, Quaternion.identity);</span><br><span class="line">		Destroy(gameObject);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="完整的Tank-cs"><a href="#完整的Tank-cs" class="headerlink" title="完整的Tank.cs"></a>完整的Tank.cs</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line">[<span class="meta">RequireComponent(typeof(Rigidbody))</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Tank</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 移动控制</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">float</span> moveSpeed = <span class="number">6</span>f;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">float</span> turnSpeed = <span class="number">180</span>f;</span><br><span class="line">	<span class="keyword">private</span> Rigidbody mRigidbody;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 发射子弹</span></span><br><span class="line">	<span class="keyword">public</span> GameObject bullet;</span><br><span class="line">	<span class="keyword">public</span> Transform bulletSpawn;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">float</span> reloadTime = <span class="number">0.2</span>f;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">float</span> mReloadTimer = <span class="number">0</span>f;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 死亡</span></span><br><span class="line">	<span class="keyword">public</span> GameObject tankExplosion;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		mRigidbody = GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">		mRigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Move</span>(<span class="params"><span class="keyword">float</span> v</span>) </span>&#123;</span><br><span class="line">		Vector3 offset = transform.forward * moveSpeed * v * Time.deltaTime;</span><br><span class="line">		mRigidbody.MovePosition(transform.position + offset);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Turn</span>(<span class="params"><span class="keyword">float</span> h</span>) </span>&#123;</span><br><span class="line">		Quaternion delta = Quaternion.AngleAxis(turnSpeed * h * Time.deltaTime, Vector3.up);</span><br><span class="line">		mRigidbody.MoveRotation(transform.rotation * delta);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		mReloadTimer += Time.deltaTime;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Fire</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (mReloadTimer &gt;= reloadTime) &#123;</span><br><span class="line">			mReloadTimer = <span class="number">0</span>f;</span><br><span class="line">			<span class="comment">// 创建子弹</span></span><br><span class="line">			GameObject obj = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation) <span class="keyword">as</span> GameObject;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Die</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		Instantiate(tankExplosion, transform.position + Vector3.up * <span class="number">1.5</span>f, Quaternion.identity);</span><br><span class="line">		Destroy(gameObject);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>记得在面板里给各个物件赋值就好了。</p>
+<h2 id="下一篇"><a href="#下一篇" class="headerlink" title="下一篇"></a>下一篇</h2><p>下一篇将实现随机生成地图功能，完善游戏逻辑（如果我前端后端移动视觉的锅做完了可能还会加入网络对战功能…)</p>
+<p>github地址我一定会更新的！</p>
 
       
     </div>
@@ -592,7 +600,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Object-Pool/" rel="tag"># Object Pool</a>
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/实战/" rel="tag"># 实战</a>
           
         </div>
       
@@ -605,8 +615,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/unity-beam/" rel="next" title="「Unity」创建激光效果">
-                <i class="fa fa-chevron-left"></i> 「Unity」创建激光效果
+              <a href="/2018/10/android-broadcast1/" rel="next" title="「Android」广播机制（一）">
+                <i class="fa fa-chevron-left"></i> 「Android」广播机制（一）
               </a>
             
           </div>
@@ -615,8 +625,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/unity-color-shader/" rel="prev" title="「Unity」纯色渲染Sprite">
-                「Unity」纯色渲染Sprite <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/android-broadcast2/" rel="prev" title="「Android」广播机制（二）">
+                「Android」广播机制（二） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -912,7 +922,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的引例"><span class="nav-number">1.</span> <span class="nav-text">简单的引例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的思想"><span class="nav-number">2.</span> <span class="nav-text">简单的思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子弹的创建"><span class="nav-number">3.</span> <span class="nav-text">子弹的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的实现"><span class="nav-number">4.</span> <span class="nav-text">简单的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后…"><span class="nav-number">5.</span> <span class="nav-text">最后…</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#资源的导入"><span class="nav-number">2.1.</span> <span class="nav-text">资源的导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景搭建"><span class="nav-number">2.2.</span> <span class="nav-text">场景搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建墙壁预设"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建墙壁预设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搭建场景"><span class="nav-number">2.2.2.</span> <span class="nav-text">搭建场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建坦克预设"><span class="nav-number">2.2.3.</span> <span class="nav-text">创建坦克预设</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坦克的操控"><span class="nav-number">3.</span> <span class="nav-text">坦克的操控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#坦克移动"><span class="nav-number">3.1.</span> <span class="nav-text">坦克移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坦克旋转"><span class="nav-number">3.2.</span> <span class="nav-text">坦克旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坦克开火"><span class="nav-number">3.3.</span> <span class="nav-text">坦克开火</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坦克销毁"><span class="nav-number">3.4.</span> <span class="nav-text">坦克销毁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测输入"><span class="nav-number">3.5.</span> <span class="nav-text">检测输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他功能"><span class="nav-number">3.6.</span> <span class="nav-text">其他功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#炮塔旋转"><span class="nav-number">3.6.1.</span> <span class="nav-text">炮塔旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#履带移动"><span class="nav-number">3.6.2.</span> <span class="nav-text">履带移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#履带适应地形"><span class="nav-number">3.6.3.</span> <span class="nav-text">履带适应地形</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子弹的实现"><span class="nav-number">4.</span> <span class="nav-text">子弹的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整的Tank-cs"><span class="nav-number">5.</span> <span class="nav-text">完整的Tank.cs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一篇"><span class="nav-number">6.</span> <span class="nav-text">下一篇</span></a></li></ol></div>
             
 
           </div>
@@ -1121,9 +1131,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://blog.grapedge.top/2016/10/sample-object-pool/';
-        this.page.identifier = '2016/10/sample-object-pool/';
-        this.page.title = '「Unity」对象池的简单使用';
+        this.page.url = 'http://blog.grapedge.top/2018/10/unity-tank-trouble1/';
+        this.page.identifier = '2018/10/unity-tank-trouble1/';
+        this.page.title = '「Unity」坦克动荡小游戏（一）';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
