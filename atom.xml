@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2019-02-05T16:18:20.843Z</updated>
+  <updated>2019-02-15T15:31:16.006Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「Web」实现一个MessageBox</title>
+    <link href="http://blog.grapedge.top/2019/02/web-msgbox/"/>
+    <id>http://blog.grapedge.top/2019/02/web-msgbox/</id>
+    <published>2019-02-15T12:50:00.000Z</published>
+    <updated>2019-02-15T15:31:16.006Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;实现效果&quot;&gt;&lt;a href=&quot;#实现效果&quot; class=&quot;headerlink&quot; title=&quot;实现效果&quot;&gt;&lt;/a&gt;实现效果&lt;/h2&gt;&lt;p&gt;本文使用HTML+CSS+JS实现了一个简单的MessageBox，其效果如图：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="WEB" scheme="http://blog.grapedge.top/categories/WEB/"/>
+    
+      <category term="前端" scheme="http://blog.grapedge.top/categories/WEB/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="http://blog.grapedge.top/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="JavaScript" scheme="http://blog.grapedge.top/tags/JavaScript/"/>
+    
+      <category term="CSS" scheme="http://blog.grapedge.top/tags/CSS/"/>
+    
+  </entry>
   
   <entry>
     <title>「Unity」坦克动荡小游戏（一）</title>
@@ -506,30 +532,6 @@
       <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
     
       <category term="栈" scheme="http://blog.grapedge.top/tags/%E6%A0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>std::bitset 笔记</title>
-    <link href="http://blog.grapedge.top/2016/11/bitset-note/"/>
-    <id>http://blog.grapedge.top/2016/11/bitset-note/</id>
-    <published>2016-11-12T02:50:30.000Z</published>
-    <updated>2018-07-01T01:02:14.510Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我们可以使用 &lt;code&gt;bitset&lt;/code&gt; 来进行一些位运算，它使得位运算更加简单。特别是 &lt;code&gt;bitset&lt;/code&gt; 可以处理超过 &lt;code&gt;unisigned long long&lt;/code&gt; 的位大小的位集合。用 &lt;code&gt;bitset&lt;/code&gt; 来代替 &lt;code&gt;bool&lt;/code&gt; 数组将减少很大的空间。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="STL" scheme="http://blog.grapedge.top/tags/STL/"/>
-    
-      <category term="bitset" scheme="http://blog.grapedge.top/tags/bitset/"/>
     
   </entry>
   
