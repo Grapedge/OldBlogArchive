@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.grapedge.top/2019/05/rpg-player-animation/</loc>
+    <lastmod>2019-05-31T13:35:26.051Z</lastmod>
+  </url>  <url>
     <loc>http://blog.grapedge.top/2019/03/jdbc-tutorial/</loc>
     <lastmod>2019-03-22T16:48:16.463Z</lastmod>
   </url>  <url>
@@ -30,6 +33,9 @@
   </url>  <url>
     <loc>http://blog.grapedge.top/2018/10/android-qqchat1/</loc>
     <lastmod>2018-10-27T06:51:12.640Z</lastmod>
+  </url>  <url>
+    <loc>http://blog.grapedge.top/2018/10/android-broadcast1/</loc>
+    <lastmod>2018-10-27T05:46:58.531Z</lastmod>
   </url>  <url>
     <loc>http://blog.grapedge.top/2018/10/android-broadcast1/</loc>
     <lastmod>2018-10-27T05:46:58.531Z</lastmod>

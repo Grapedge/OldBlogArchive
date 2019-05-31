@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2019-03-22T16:48:16.463Z</updated>
+  <updated>2019-05-31T13:35:26.051Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「Unity2D RPG游戏开发」角色动画</title>
+    <link href="http://blog.grapedge.top/2019/05/rpg-player-animation/"/>
+    <id>http://blog.grapedge.top/2019/05/rpg-player-animation/</id>
+    <published>2019-05-31T13:24:58.000Z</published>
+    <updated>2019-05-31T13:35:26.051Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Sprite动画&quot;&gt;&lt;a href=&quot;#Sprite动画&quot; class=&quot;headerlink&quot; title=&quot;Sprite动画&quot;&gt;&lt;/a&gt;Sprite动画&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Unity&lt;/code&gt; 中角色动画一般通过 &lt;code&gt;Mecanim&lt;/code&gt; 动画系统实现。对于一款可能涉及到上千个角色的RPG游戏，这种工作方式无疑是复杂且累的，而精灵动画的格式又是相似的(例如下图)。本文使用的 &lt;code&gt;Sprite&lt;/code&gt; 素材均类似于下图，这是 &lt;code&gt;RPG Maker&lt;/code&gt; 风格的角色行走图。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Unity" scheme="http://blog.grapedge.top/categories/Unity/"/>
+    
+      <category term="实战" scheme="http://blog.grapedge.top/categories/Unity/%E5%AE%9E%E6%88%98/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>「Java」数据库编程</title>
@@ -376,6 +396,30 @@
   </entry>
   
   <entry>
+    <title>「Android」广播机制（一）</title>
+    <link href="http://blog.grapedge.top/2018/10/android-broadcast1/"/>
+    <id>http://blog.grapedge.top/2018/10/android-broadcast1/</id>
+    <published>2018-10-14T12:50:00.000Z</published>
+    <updated>2018-10-27T05:46:58.531Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;Android 有一套完备的广播机制。当系统或程序发送了广播之后，对此广播感兴趣的&lt;strong&gt;广播接收器&lt;/strong&gt;会收到并处理这条广播。广播有很多用处，例如监听系统的网络变化。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://blog.grapedge.top/categories/Android/"/>
+    
+      <category term="广播机制" scheme="http://blog.grapedge.top/categories/Android/%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6/"/>
+    
+    
+      <category term="Android" scheme="http://blog.grapedge.top/tags/Android/"/>
+    
+      <category term="Broadcast" scheme="http://blog.grapedge.top/tags/Broadcast/"/>
+    
+  </entry>
+  
+  <entry>
     <title>KMP算法</title>
     <link href="http://blog.grapedge.top/2017/03/kmp-note/"/>
     <id>http://blog.grapedge.top/2017/03/kmp-note/</id>
@@ -486,54 +530,6 @@
     
     
       <category term="树链剖分" scheme="http://blog.grapedge.top/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「UVa679」Dropping Balls</title>
-    <link href="http://blog.grapedge.top/2016/11/dropping-balls/"/>
-    <id>http://blog.grapedge.top/2016/11/dropping-balls/</id>
-    <published>2016-11-13T07:34:53.000Z</published>
-    <updated>2018-10-13T08:15:29.199Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;有一棵具有 $2^D-1$ 个节点的二叉树， $I$ 个小球，每个节点是一个开关，默认为关，小球每到一个点上会改变该点的状态为相反的状态，若此时开关为开则向左移动，若为关则向右移动。问第 $I$ 个小球最终会下落到几号节点。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="二叉树" scheme="http://blog.grapedge.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="UVa" scheme="http://blog.grapedge.top/tags/UVa/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>左偏树</title>
-    <link href="http://blog.grapedge.top/2016/11/left-tree/"/>
-    <id>http://blog.grapedge.top/2016/11/left-tree/</id>
-    <published>2016-11-12T13:24:58.000Z</published>
-    <updated>2018-07-01T01:41:14.679Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;左偏树是一种可并堆，这使得他满足堆的性质，也能在 $\Theta (\log_2N)$ 的时间内合并两个堆。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="二叉树" scheme="http://blog.grapedge.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-      <category term="可并堆" scheme="http://blog.grapedge.top/tags/%E5%8F%AF%E5%B9%B6%E5%A0%86/"/>
     
   </entry>
   

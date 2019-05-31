@@ -4,6 +4,30 @@
   
     
     <entry>
+      <title><![CDATA[「Unity2D RPG游戏开发」角色动画]]></title>
+      <url>http://blog.grapedge.top/2019/05/rpg-player-animation/</url>
+      <content type="html"><![CDATA[<h2 id="Sprite动画"><a href="#Sprite动画" class="headerlink" title="Sprite动画"></a>Sprite动画</h2><p><code>Unity</code> 中角色动画一般通过 <code>Mecanim</code> 动画系统实现。对于一款可能涉及到上千个角色的RPG游戏，这种工作方式无疑是复杂且累的，而精灵动画的格式又是相似的(例如下图)。本文使用的 <code>Sprite</code> 素材均类似于下图，这是 <code>RPG Maker</code> 风格的角色行走图。<br><a id="more"></a><br><img src="https://s2.ax1x.com/2019/05/31/VlbUsI.png" alt="角色行走图.png"></p>
+<h3 id="Sprite动态更换"><a href="#Sprite动态更换" class="headerlink" title="Sprite动态更换"></a>Sprite动态更换</h3><p>如果要使用 <code>Mecanim</code>，那么我们无疑是想要 <code>Animator Controller</code> 被复用的，我查找了许多资料，只找到了这种实现方式(如果你有更好的方式，希望可以在评论中指出): </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用LateUpdate函数，在所有其他Update完成之后被调用</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LateUpdate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 加载用于换皮的Sprite</span></span><br><span class="line">    <span class="keyword">var</span> subSprites = Resources.LoadAll&lt;Sprite&gt;(spriteSheetName);</span><br><span class="line">    <span class="comment">// 拿到当前SpriteRender中有效的SpriteName</span></span><br><span class="line">    <span class="keyword">string</span> spriteName = spriteRenderer.sprite.name;</span><br><span class="line">    <span class="comment">// 在候选队列里找名字相同的Sprite</span></span><br><span class="line">    Sprite newSprite = Array.Find(subSprites, item =&gt; item.name == spriteName);</span><br><span class="line">    <span class="comment">// 如果有，则替换</span></span><br><span class="line">    <span class="keyword">if</span> (newSprite) &#123;</span><br><span class="line">        spriteRenderer.sprite = newSprite;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此实现来自于<a href="https://jingxuanwang.github.io/2014/05/10/unity-2d-animation-tricks" target="_blank" rel="noopener">这篇博客</a></p>
+<h3 id="代码实现动画"><a href="#代码实现动画" class="headerlink" title="代码实现动画"></a>代码实现动画</h3><p>这是我倾向于的实现方式，因为 <code>Sprite</code> 格式统一，我们可以很方便的对图片进行解析。<br>这是实现效果:<br><img src="https://s2.ax1x.com/2019/05/31/Vlxpff.gif" alt="实现效果.gif"><br>对图片进行分割操作:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Scile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    m_MoveSprite = <span class="keyword">new</span> Sprite[<span class="number">4</span>, <span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span> width = m_PlayerMoveTexture.width / <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">int</span> height = m_PlayerMoveTexture.height / <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; ++j) &#123;</span><br><span class="line">            m_MoveSprite[<span class="number">3</span> - i, <span class="number">2</span> - j] = Sprite.Create(m_PlayerMoveTexture, <span class="keyword">new</span> Rect(j * width, i * height, width, height), <span class="keyword">new</span> Vector2(<span class="number">0.5</span>f, <span class="number">0</span>f), Mathf.Min(width, height));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的行走图差不多有两个状态: <code>行走</code> 和 <code>闲置</code>。<br>对于 <code>闲置</code> 状态，就是每一行的第二个元素，<code>行走</code> 状态，就是不断切换每一行的三个元素。</p>
+<p>下面是完整代码，这只是一个<strong>简单的示例</strong>，实际上，你可以编写一些动画状态来控制动画。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 用于播放角色动画。</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerAnimation</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">    <span class="keyword">private</span> Texture2D m_PlayerMoveTexture;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Sprite[, ] m_MoveSprite;</span><br><span class="line">    <span class="keyword">private</span> SpriteRenderer m_SpriteRenderer;</span><br><span class="line"></span><br><span class="line">	  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        Scile();</span><br><span class="line">        m_SpriteRenderer = GetComponent&lt;SpriteRenderer&gt;();</span><br><span class="line">        StartCoroutine(Test());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 切分动画</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Scile</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        m_MoveSprite = <span class="keyword">new</span> Sprite[<span class="number">4</span>, <span class="number">3</span>];</span><br><span class="line">        <span class="keyword">int</span> width = m_PlayerMoveTexture.width / <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> height = m_PlayerMoveTexture.height / <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; ++j) &#123;</span><br><span class="line">                m_MoveSprite[<span class="number">3</span> - i, <span class="number">2</span> - j] = Sprite.Create(m_PlayerMoveTexture, <span class="keyword">new</span> Rect(j * width, i * height, width, height), <span class="keyword">new</span> Vector2(<span class="number">0.5</span>f, <span class="number">0</span>f), Mathf.Min(width, height));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 测试播放动画函数</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> IEnumerator <span class="title">Test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        Play(<span class="string">"idle"</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">2</span>f</span>)</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; ; i++) &#123;</span><br><span class="line">            Play(<span class="string">"walk"</span>, i % <span class="number">4</span>);</span><br><span class="line">            <span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">2</span>f</span>)</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> animTime = <span class="number">0.25</span>f;   <span class="comment">// 多少秒播放一帧动画</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> m_AnimTimer = <span class="number">0</span>f;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          m_AnimTimer += Time.deltaTime;</span><br><span class="line">          <span class="keyword">if</span> (m_AnimTimer &gt; animTime) &#123;</span><br><span class="line">              m_AnimTimer -= animTime;</span><br><span class="line">              NextFrame();</span><br><span class="line">          &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m_Direction = <span class="number">0</span>;        <span class="comment">// 当前方向</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> m_PlayingName = <span class="string">"idle"</span>;      <span class="comment">// 当前动画名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m_CurAnimIndex = <span class="number">0</span>;     <span class="comment">// 当前动画索引</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 播放动画</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="name"&gt;</span>动画名，idle或walk<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param dir="dir"&gt;</span>方向<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Play</span>(<span class="params">String name, <span class="keyword">int</span> dir</span>) </span>&#123;</span><br><span class="line">        m_Direction = Mathf.Clamp(dir, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">        m_PlayingName = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 切换到下一帧</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">NextFrame</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (m_PlayingName == <span class="string">"idle"</span>) &#123;</span><br><span class="line">            m_SpriteRenderer.sprite = m_MoveSprite[m_Direction, <span class="number">1</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (m_PlayingName == <span class="string">"walk"</span>) &#123;</span><br><span class="line">            m_CurAnimIndex = (m_CurAnimIndex + <span class="number">1</span>) % <span class="number">3</span>;</span><br><span class="line">            m_SpriteRenderer.sprite = m_MoveSprite[m_Direction, m_CurAnimIndex];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Unity </category>
+            
+            <category> 实战 </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[「Java」数据库编程]]></title>
       <url>http://blog.grapedge.top/2019/03/jdbc-tutorial/</url>
       <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Java提供了一套数据库连接（JDBC）API。数据库开发商较多，而每个开发商都提供了不同的协议，因此JDBC在设计上提供了一个驱动管理器，让开发商实现自己的驱动程序，所以Java可以用同一套API去操控不同类型的数据库。<br><a id="more"></a></p>
@@ -638,6 +662,201 @@
 <p>发送广播：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">localBroadcastManager.registerReceiver(myReceiver, intentFilter);</span><br><span class="line">localBroadcastManager.sendBroadcast(intent);</span><br><span class="line">localBroadcastManager.registerReceiver(myReceiver);</span><br></pre></td></tr></table></figure>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>除了文章中介绍的一些广播外，还有一些其他类型的广播，大家可以根据需要进行学习。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Android </category>
+            
+            <category> 广播机制 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> Broadcast </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[「Android」广播机制（一）]]></title>
+      <url>http://blog.grapedge.top/2018/10/android-broadcast1/</url>
+      <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Android 有一套完备的广播机制。当系统或程序发送了广播之后，对此广播感兴趣的<strong>广播接收器</strong>会收到并处理这条广播。广播有很多用处，例如监听系统的网络变化。<br><a id="more"></a></p>
+<h2 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h2><p>Android 中的广播主要可以分为五类：</p>
+<ul>
+<li>Normal Broadcast</li>
+<li>System Broadcast</li>
+<li>Ordered Broadcast</li>
+<li>Sticky Broadcast</li>
+<li>Local Broadcast</li>
+</ul>
+<p>其中最常用的是 <code>Normal Broadcast</code> 与 <code>Ordered Broadcast</code> ，他们之间最大的区别就是 <code>Normal Broadcast</code> 发送的广播是<strong>异步无序</strong>的，而 <code>Ordered Broadcast</code> 的广播是<strong>同步有序</strong>的，也就意味着前者的广播无法被截断但效率高，后者可以被截断但效率相对会低。</p>
+<h2 id="系统广播"><a href="#系统广播" class="headerlink" title="系统广播"></a>系统广播</h2><p>广播系统的消息被封装在 <code>intent</code> 中，其中的 <code>action name</code> 用于标识广播。其中<strong>部分</strong>（如果有时间我会进行补全）的系统广播的 <code>action name</code> 如下：</p>
+<table>
+<thead>
+<tr>
+<th>action name</th>
+<th>在此状态发送广播</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACTION_AIRPLANE_MODE_CHANGED</td>
+<td>更改飞行模式状态</td>
+</tr>
+<tr>
+<td>ACTION_APPLICATION_RESTRICTIONS_CHANGED</td>
+<td>更改应用权限时</td>
+</tr>
+<tr>
+<td>ACTION_BATTERY_CHANGED</td>
+<td>电池电量改变</td>
+</tr>
+<tr>
+<td>ACTION_BATTERY_LOW</td>
+<td>电池电量过低</td>
+</tr>
+<tr>
+<td>ACTION_BATTERY_OKAY</td>
+<td>电池电量饱满（由低入高）</td>
+</tr>
+<tr>
+<td>ACTION_BOOT_COMPLETED</td>
+<td>只广播一次，系统启动后</td>
+</tr>
+<tr>
+<td>ACTION_CAMERA_BUTTON</td>
+<td>按下相机拍照按键（物理）时</td>
+</tr>
+<tr>
+<td>ACTION_CLOSE_SYSTEM_DIALOGS</td>
+<td>请求关闭系统临时对话框时</td>
+</tr>
+<tr>
+<td>ACTION_CONFIGURATION_CHANGED</td>
+<td>设置改变时</td>
+</tr>
+<tr>
+<td>ACTION_DATE_CHANGED</td>
+<td>日期改变时</td>
+</tr>
+<tr>
+<td>ACTION_DOCK_EVENT</td>
+<td>更改设备物理对接状态时</td>
+</tr>
+<tr>
+<td>ACTION_EXTERNAL_APPLICATIONS_AVAILABLE</td>
+<td>一组包的资源目前可用</td>
+</tr>
+<tr>
+<td>ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE</td>
+<td>一组包的资源目前不可用</td>
+</tr>
+<tr>
+<td>ACTION_GTALK_SERVICE_CONNECTED</td>
+<td>已建立GTalk连接时</td>
+</tr>
+<tr>
+<td>ACTION_GTALK_SERVICE_DISCONNECTED</td>
+<td>停止GTalk连接时</td>
+</tr>
+<tr>
+<td>ACTION_HEADSET_PLUG</td>
+<td>有线耳机插入或拔出</td>
+</tr>
+<tr>
+<td>ACTION_INPUT_METHOD_CHANGED</td>
+<td>输入法改变时</td>
+</tr>
+<tr>
+<td>ACTION_LOCALE_CHANGED</td>
+<td>设备区域更改</td>
+</tr>
+<tr>
+<td>ACTION_LOCKED_BOOT_COMPLETED</td>
+<td>用户完成引导之后但仍处于 <code>locked</code> 状态时，只广播一次</td>
+</tr>
+<tr>
+<td>ACTION_MANAGE_PACKAGE_STORAGE</td>
+<td>处于用户设置的低内存条件时，应该启动 <code>package management</code></td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_BAD_REMOVAL</td>
+<td>删除了SD卡中的额外介质但没有卸载挂载</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_BUTTON</td>
+<td>按下 <code>Media Button</code> 时</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_CHECKING</td>
+<td>存在外部介质，并进行检查时</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_EJECT</td>
+<td>用户希望移除存储介质时</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_MOUNTED</td>
+<td>外部介质存在且已挂载</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_NOFS</td>
+<td>存在外部介质，但使用的是不兼容的fs（或为空）</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_REMOVED</td>
+<td>外部介质被移除</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_SCANNER_FINISHED</td>
+<td><code>media scanner</code> 已经完成扫描目录</td>
+</tr>
+<tr>
+<td>ACTION_MEDIA_SCANNER_SCAN_FILE</td>
+<td>请求 <code>media scanner</code> 扫描文件并将其添加到媒体数据库</td>
+</tr>
+<tr>
+<td>ACTION_PACKAGE_ADDED</td>
+<td>成功安装应用程序时</td>
+</tr>
+<tr>
+<td>ACTION_PACKAGE_REMOVED</td>
+<td>成功移除应用程序时</td>
+</tr>
+<tr>
+<td>ACTION_REBOOT</td>
+<td>重新启动时</td>
+</tr>
+<tr>
+<td>ACTION_SCREEN_OFF</td>
+<td>系统睡眠时</td>
+</tr>
+<tr>
+<td>ACTION_SCREEN_ON</td>
+<td>系统被唤醒时</td>
+</tr>
+<tr>
+<td>ACTION_SHUTDOWN</td>
+<td>设备关机时</td>
+</tr>
+</tbody>
+</table>
+<p>Android 的广播分为静态注册和动态注册两种注册方式，动态注册的广播只存在于程序注册广播的生命周期中，也就是说只能在程序启动后才能收到广播，而静态广播可以在程序未被启动时即可监听。一般我们不推荐使用静态广播（占用内存影响效率），除非你真的需要。</p>
+<h3 id="使用动态广播监听系统网络变化"><a href="#使用动态广播监听系统网络变化" class="headerlink" title="使用动态广播监听系统网络变化"></a>使用动态广播监听系统网络变化</h3><p><img src="https://s1.ax1x.com/2018/10/14/iUDBLQ.png" alt="创建"><br>创建一个 <code>NetworkChangeReceiver</code> ，他需要重载 <code>onReceive</code> 函数来实现收到广播后需要完成的事情。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NetworkChangeReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</span><br><span class="line"></span><br><span class="line">        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();</span><br><span class="line">        <span class="keyword">if</span> (networkInfo != <span class="keyword">null</span> &amp;&amp; networkInfo.isConnected()) &#123;</span><br><span class="line">            Toast.makeText(context, <span class="string">"网络已经连接"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Toast.makeText(context, <span class="string">"网络未连接"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>写好之后，不免会有疑问，这个广播接收器应该接收什么样的广播，怎么给他进行设置。答案就是通过 <code>intent-filter</code> 打开 <code>AndroidManifest.xml</code>，修改<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:name</span>=<span class="string">".NetworkChangeReceiver"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:enabled</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>为<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:name</span>=<span class="string">".NetworkChangeReceiver"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:enabled</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.net.conn.CONNECTIVITY_CHANGE"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>一开始的表格中的 <code>action name</code> 便是广播信息的标识，因为我们要监测网络变化，所以这里的 <code>action name</code> 我们填写 <code>android.net.conn.CONNECTIVITY_CHANGE</code> 。</p>
+<p>接着我们只需要对广播接收器进行注册，广播接收器就能收到广播了。打开 <code>MainActivity.java</code>，重载如下方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> NetworkChangeReceiver networkChangeReceiver;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (networkChangeReceiver == <span class="keyword">null</span>) &#123;</span><br><span class="line">            networkChangeReceiver = <span class="keyword">new</span> NetworkChangeReceiver();</span><br><span class="line">        &#125;</span><br><span class="line">        IntentFilter intentFilter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);</span><br><span class="line">        registerReceiver(networkChangeReceiver, intentFilter);</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        unregisterReceiver(networkChangeReceiver);</span><br><span class="line">        <span class="keyword">super</span>.onPause();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们使用 <code>registerReceiver</code> 函数对广播接收器进行注册，其第一个参数是要进行注册的广播接收器，第二个参数是一个进行匹配的 <code>intent-filter</code>。<br>我们使用 <code>unregisterReceiver</code> 取消对广播接收器的注册，这样这个广播接收器将不再接收广播。</p>
+<p>注册方法其实可以写在任意地方，重载这两个函数只是为了更好的利用资源（不妨想想这两个函数在activity生命周期何时运行），另外要记得执行 <code>unregisterReceiver</code> 取消注册，以防止内存泄露。</p>
+<p><img src="https://s1.ax1x.com/2018/10/14/iUsZ36.png" alt="效果"></p>
+<h2 id="下一篇"><a href="#下一篇" class="headerlink" title="下一篇"></a>下一篇</h2><p>在下一篇博客中，我们将学习静态注册以及有序广播。</p>
 ]]></content>
       
         <categories>
