@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2019-06-06T02:10:58.280Z</updated>
+  <updated>2019-12-08T04:34:38.574Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「CSS」制作笔记本横线效果</title>
+    <link href="http://blog.grapedge.top/2019/12/css-horizontail-line/"/>
+    <id>http://blog.grapedge.top/2019/12/css-horizontail-line/</id>
+    <published>2019-12-08T02:12:00.000Z</published>
+    <updated>2019-12-08T04:34:38.574Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;最近接到需求实现类似笔记本横线的 &lt;code&gt;textarea&lt;/code&gt;，这里简单写写实现思路。&lt;/p&gt;
+&lt;h2 id=&quot;预览&quot;&gt;&lt;a href=&quot;#预览&quot; class=&quot;headerlink&quot; title=&quot;预览&quot;&gt;&lt;/a&gt;预览&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://s2.ax1x.com/2019/12/08/QUvQMQ.png&quot; alt=&quot;QUvQMQ.png&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://blog.grapedge.top/categories/Web/"/>
+    
+      <category term="CSS" scheme="http://blog.grapedge.top/categories/Web/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://blog.grapedge.top/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「Express」使用 Multer 实现文件上传</title>
+    <link href="http://blog.grapedge.top/2019/11/express-multer/"/>
+    <id>http://blog.grapedge.top/2019/11/express-multer/</id>
+    <published>2019-11-19T09:50:00.000Z</published>
+    <updated>2019-12-08T02:09:05.596Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;好像很久没更过博客了，又正在写这学期的 &lt;code&gt;Web课设&lt;/code&gt; 的文件上传接口，就随手写点吧。&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/expressjs/multer&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Multer&lt;/a&gt; 是可以轻松的处理 &lt;code&gt;multipart/form-data&lt;/code&gt; 表单数据的 &lt;code&gt;Node&lt;/code&gt; 中间件。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://blog.grapedge.top/categories/Web/"/>
+    
+      <category term="Node" scheme="http://blog.grapedge.top/categories/Web/Node/"/>
+    
+      <category term="Express" scheme="http://blog.grapedge.top/categories/Web/Node/Express/"/>
+    
+    
+      <category term="Node.JS" scheme="http://blog.grapedge.top/tags/Node-JS/"/>
+    
+      <category term="Express" scheme="http://blog.grapedge.top/tags/Express/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>「JavaScript」Promise</title>
+    <link href="http://blog.grapedge.top/2019/08/javascript-async-promise/"/>
+    <id>http://blog.grapedge.top/2019/08/javascript-async-promise/</id>
+    <published>2019-08-17T07:50:00.000Z</published>
+    <updated>2019-11-19T09:40:05.327Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;没错这篇博客我鸽了。有缘再更。&lt;/p&gt;
+&lt;h2 id=&quot;Promise&quot;&gt;&lt;a href=&quot;#Promise&quot; class=&quot;headerlink&quot; title=&quot;Promise&quot;&gt;&lt;/a&gt;Promise&lt;/h2&gt;&lt;h2 id=&quot;async与await&quot;&gt;&lt;a href=&quot;
+      
+    
+    </summary>
+    
+      <category term="Web" scheme="http://blog.grapedge.top/categories/Web/"/>
+    
+      <category term="JavaScript" scheme="http://blog.grapedge.top/categories/Web/JavaScript/"/>
+    
+      <category term="异步" scheme="http://blog.grapedge.top/categories/Web/JavaScript/%E5%BC%82%E6%AD%A5/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.grapedge.top/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>「Unity2D RPG游戏开发」角色动画</title>
@@ -396,30 +474,6 @@
   </entry>
   
   <entry>
-    <title>「Android」广播机制（一）</title>
-    <link href="http://blog.grapedge.top/2018/10/android-broadcast1/"/>
-    <id>http://blog.grapedge.top/2018/10/android-broadcast1/</id>
-    <published>2018-10-14T12:50:00.000Z</published>
-    <updated>2018-10-27T05:46:58.531Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;Android 有一套完备的广播机制。当系统或程序发送了广播之后，对此广播感兴趣的&lt;strong&gt;广播接收器&lt;/strong&gt;会收到并处理这条广播。广播有很多用处，例如监听系统的网络变化。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://blog.grapedge.top/categories/Android/"/>
-    
-      <category term="广播机制" scheme="http://blog.grapedge.top/categories/Android/%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6/"/>
-    
-    
-      <category term="Android" scheme="http://blog.grapedge.top/tags/Android/"/>
-    
-      <category term="Broadcast" scheme="http://blog.grapedge.top/tags/Broadcast/"/>
-    
-  </entry>
-  
-  <entry>
     <title>KMP算法</title>
     <link href="http://blog.grapedge.top/2017/03/kmp-note/"/>
     <id>http://blog.grapedge.top/2017/03/kmp-note/</id>
@@ -484,52 +538,6 @@
     
     
       <category term="Tarjan" scheme="http://blog.grapedge.top/tags/Tarjan/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Tarjan 算法</title>
-    <link href="http://blog.grapedge.top/2017/03/tarjan-note/"/>
-    <id>http://blog.grapedge.top/2017/03/tarjan-note/</id>
-    <published>2017-03-02T04:10:30.000Z</published>
-    <updated>2018-07-01T01:06:32.391Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Tarjan&lt;/code&gt; 用于求解 &lt;code&gt;有向图&lt;/code&gt; 的强连通分量。在有向图 &lt;code&gt;G&lt;/code&gt; 中如果两个顶点 &lt;code&gt;u&lt;/code&gt;、 &lt;code&gt;v&lt;/code&gt; 之间相互可达，则称这两个点是强连通的。若 &lt;code&gt;G&lt;/code&gt; 中任意两点是强连通的，则称图 &lt;code&gt;G&lt;/code&gt; 是 &lt;code&gt;强连通图&lt;/code&gt;。有向非强连通图的&lt;strong&gt;极大强连通子图&lt;/strong&gt;称为强连通分量。极大的意义是，对于图 &lt;code&gt;G&lt;/code&gt; 的一个极大强连通子图 &lt;code&gt;K&lt;/code&gt;，当我们将原图 &lt;code&gt;G&lt;/code&gt; 中任意一个非 &lt;code&gt;K&lt;/code&gt; 结点加入 &lt;code&gt;K&lt;/code&gt; 后，&lt;code&gt;K&lt;/code&gt; 不再是一个强连通图。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="Tarjan" scheme="http://blog.grapedge.top/tags/Tarjan/"/>
-    
-      <category term="图论" scheme="http://blog.grapedge.top/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>树链剖分</title>
-    <link href="http://blog.grapedge.top/2017/01/chain-split/"/>
-    <id>http://blog.grapedge.top/2017/01/chain-split/</id>
-    <published>2017-01-18T13:24:58.000Z</published>
-    <updated>2018-07-01T01:43:03.068Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;树链剖分常用于解决静态树上路径信息维护的问题，例如修改树上某条路径中所有结点的值，或是查询某路径中所有结点的和。假如说该树退化为一条链，这便成了区间修改、区间查询问题。如果我们能将树上的点按照某种方式组织起来，剖分成若干条链，则每条链相当于一个区间，此时便可用一些其他数据结构进行维护。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="树链剖分" scheme="http://blog.grapedge.top/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
   </entry>
   
