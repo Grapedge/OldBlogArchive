@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.grapedge.top/"/>
-  <updated>2019-12-08T04:34:38.574Z</updated>
+  <updated>2019-12-27T14:26:14.766Z</updated>
   <id>http://blog.grapedge.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「React」Ripple Button</title>
+    <link href="http://blog.grapedge.top/2019/12/react-ripple-button/"/>
+    <id>http://blog.grapedge.top/2019/12/react-ripple-button/</id>
+    <published>2019-12-27T14:10:00.000Z</published>
+    <updated>2019-12-27T14:26:14.766Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;模仿 &lt;code&gt;Google Material&lt;/code&gt; 点击波纹效果。&lt;/p&gt;
+&lt;h2 id=&quot;预览&quot;&gt;&lt;a href=&quot;#预览&quot; class=&quot;headerlink&quot; title=&quot;预览&quot;&gt;&lt;/a&gt;预览&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://s2.ax1x.com/2019/12/27/lZ2RjP.gif&quot; alt=&quot;lZ2RjP.gif&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://blog.grapedge.top/categories/Web/"/>
+    
+      <category term="React" scheme="http://blog.grapedge.top/categories/Web/React/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.grapedge.top/tags/JavaScript/"/>
+    
+      <category term="React" scheme="http://blog.grapedge.top/tags/React/"/>
+    
+      <category term="Web" scheme="http://blog.grapedge.top/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>「CSS」制作笔记本横线效果</title>
@@ -516,28 +543,6 @@
       <category term="Tarjan" scheme="http://blog.grapedge.top/tags/Tarjan/"/>
     
       <category term="图论" scheme="http://blog.grapedge.top/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图的割点</title>
-    <link href="http://blog.grapedge.top/2017/03/cut-vertex/"/>
-    <id>http://blog.grapedge.top/2017/03/cut-vertex/</id>
-    <published>2017-03-03T04:00:30.000Z</published>
-    <updated>2018-07-01T01:11:00.070Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;定义：对于无向图 &lt;code&gt;G&lt;/code&gt; ，如果删除某个顶点 &lt;code&gt;u&lt;/code&gt; 之后，连通分量的数目增加，则称 &lt;code&gt;u&lt;/code&gt; 为图的割点。一个图可能有多个割点。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="OI" scheme="http://blog.grapedge.top/categories/OI/"/>
-    
-      <category term="NOIP" scheme="http://blog.grapedge.top/categories/OI/NOIP/"/>
-    
-    
-      <category term="Tarjan" scheme="http://blog.grapedge.top/tags/Tarjan/"/>
     
   </entry>
   
